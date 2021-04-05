@@ -503,7 +503,7 @@ function processArgs(methodName, fromArgs) {var argsOption = arguments.length > 
           keyOption = keyOption(fromArgs[key], fromArgs, toArgs);
         }
         if (!keyOption) {// 不支持的参数
-          console.warn("The '".concat(methodName, "' method of platform '\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F' does not support option '").concat(key, "'"));
+          console.warn("\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F ".concat(methodName, "\u6682\u4E0D\u652F\u6301").concat(key));
         } else if (isStr(keyOption)) {// 重写参数 key
           toArgs[keyOption] = fromArgs[key];
         } else if (isPlainObject(keyOption)) {// {name:newName,value:value}可重新指定参数 key:value
@@ -538,7 +538,7 @@ function wrapper(methodName, method) {
     var protocol = protocols[methodName];
     if (!protocol) {// 暂不支持的 api
       return function () {
-        console.error("Platform '\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F' does not support '".concat(methodName, "'."));
+        console.error("\u5FAE\u4FE1\u5C0F\u7A0B\u5E8F \u6682\u4E0D\u652F\u6301".concat(methodName));
       };
     }
     return function (arg1, arg2) {// 目前 api 最多两个参数
@@ -585,7 +585,7 @@ function createTodoApi(name) {
 
   {var fail = _ref.fail,complete = _ref.complete;
     var res = {
-      errMsg: "".concat(name, ":fail method '").concat(name, "' not supported") };
+      errMsg: "".concat(name, ":fail:\u6682\u4E0D\u652F\u6301 ").concat(name, " \u65B9\u6CD5") };
 
     isFn(fail) && fail(res);
     isFn(complete) && complete(res);
@@ -619,7 +619,7 @@ function getProvider(_ref2)
     isFn(success) && success(res);
   } else {
     res = {
-      errMsg: 'getProvider:fail service not found' };
+      errMsg: 'getProvider:fail:服务[' + service + ']不存在' };
 
     isFn(fail) && fail(res);
   }
@@ -1323,12 +1323,7 @@ function parseBaseApp(vm, _ref3)
 
       delete this.$options.mpType;
       delete this.$options.mpInstance;
-      if (this.mpType === 'page') {// hack vue-i18n
-        var app = getApp();
-        if (app.$vm && app.$vm.$i18n) {
-          this._i18n = app.$vm.$i18n;
-        }
-      }
+
       if (this.mpType !== 'app') {
         initRefs(this);
         initMocks(this, mocks);
@@ -7875,9 +7870,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!************************************!*\
-  !*** H:/vote_sssh/vote/pages.json ***!
-  \************************************/
+/*!*******************************!*\
+  !*** D:/work/vote/pages.json ***!
+  \*******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -8018,9 +8013,9 @@ function normalizeComponent (
 
 /***/ }),
 /* 11 */
-/*!****************************************!*\
-  !*** H:/vote_sssh/vote/store/index.js ***!
-  \****************************************/
+/*!***********************************!*\
+  !*** D:/work/vote/store/index.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9180,9 +9175,9 @@ var index = {
 
 /***/ }),
 /* 13 */
-/*!********************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/index.js ***!
-  \********************************************************/
+/*!***************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/index.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9331,9 +9326,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 14 */
-/*!*******************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/mixin/mixin.js ***!
-  \*******************************************************************/
+/*!**************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/mixin/mixin.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9404,9 +9399,9 @@ var install = function install(Vue) {
 
 /***/ }),
 /* 15 */
-/*!*********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/request/index.js ***!
-  \*********************************************************************/
+/*!****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/request/index.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9584,9 +9579,9 @@ new Request();exports.default = _default;
 
 /***/ }),
 /* 16 */
-/*!**************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/deepMerge.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/deepMerge.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9624,9 +9619,9 @@ deepMerge;exports.default = _default;
 
 /***/ }),
 /* 17 */
-/*!**************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/deepClone.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/deepClone.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9657,9 +9652,9 @@ deepClone;exports.default = _default;
 
 /***/ }),
 /* 18 */
-/*!*********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/test.js ***!
-  \*********************************************************************/
+/*!****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/test.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9898,9 +9893,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 
 /***/ }),
 /* 19 */
-/*!****************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/queryParams.js ***!
-  \****************************************************************************/
+/*!***********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/queryParams.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9966,17 +9961,17 @@ queryParams;exports.default = _default;
 
 /***/ }),
 /* 20 */
-/*!**********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/route.js ***!
-  \**********************************************************************/
+/*!*****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/route.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * 并且带有路由拦截功能
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       */var
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * 并且带有路由拦截功能
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */var
 
 Router = /*#__PURE__*/function () {
   function Router() {_classCallCheck(this, Router);
@@ -10887,9 +10882,9 @@ if (hadRuntime) {
 
 /***/ }),
 /* 24 */
-/*!***************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/timeFormat.js ***!
-  \***************************************************************************/
+/*!**********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/timeFormat.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10948,9 +10943,9 @@ timeFormat;exports.default = _default;
 
 /***/ }),
 /* 25 */
-/*!*************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/timeFrom.js ***!
-  \*************************************************************************/
+/*!********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/timeFrom.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11005,9 +11000,9 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 /* 26 */
-/*!******************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/colorGradient.js ***!
-  \******************************************************************************/
+/*!*************************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/colorGradient.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11148,9 +11143,9 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 
 /***/ }),
 /* 27 */
-/*!*********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/guid.js ***!
-  \*********************************************************************/
+/*!****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/guid.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11199,9 +11194,9 @@ guid;exports.default = _default;
 
 /***/ }),
 /* 28 */
-/*!**********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/color.js ***!
-  \**********************************************************************/
+/*!*****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/color.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11246,9 +11241,9 @@ color;exports.default = _default;
 
 /***/ }),
 /* 29 */
-/*!**************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/type2icon.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/type2icon.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11291,9 +11286,9 @@ type2icon;exports.default = _default;
 
 /***/ }),
 /* 30 */
-/*!****************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/randomArray.js ***!
-  \****************************************************************************/
+/*!***********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/randomArray.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11308,9 +11303,9 @@ randomArray;exports.default = _default;
 
 /***/ }),
 /* 31 */
-/*!************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/addUnit.js ***!
-  \************************************************************************/
+/*!*******************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/addUnit.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11326,9 +11321,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 
 /***/ }),
 /* 32 */
-/*!***********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/random.js ***!
-  \***********************************************************************/
+/*!******************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/random.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11346,9 +11341,9 @@ random;exports.default = _default;
 
 /***/ }),
 /* 33 */
-/*!*********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/trim.js ***!
-  \*********************************************************************/
+/*!****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/trim.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11371,9 +11366,9 @@ trim;exports.default = _default;
 
 /***/ }),
 /* 34 */
-/*!**********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/toast.js ***!
-  \**********************************************************************/
+/*!*****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/toast.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11391,9 +11386,9 @@ toast;exports.default = _default;
 
 /***/ }),
 /* 35 */
-/*!**************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/getParent.js ***!
-  \**************************************************************************/
+/*!*********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/getParent.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11448,9 +11443,9 @@ function getParent(name, keys) {
 
 /***/ }),
 /* 36 */
-/*!************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/$parent.js ***!
-  \************************************************************************/
+/*!*******************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/$parent.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11476,9 +11471,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 
 /***/ }),
 /* 37 */
-/*!********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/sys.js ***!
-  \********************************************************************/
+/*!***************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/sys.js ***!
+  \***************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11494,9 +11489,9 @@ function sys() {
 
 /***/ }),
 /* 38 */
-/*!*************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/debounce.js ***!
-  \*************************************************************************/
+/*!********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/debounce.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11533,9 +11528,9 @@ debounce;exports.default = _default;
 
 /***/ }),
 /* 39 */
-/*!*************************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/function/throttle.js ***!
-  \*************************************************************************/
+/*!********************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/function/throttle.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11575,9 +11570,9 @@ throttle;exports.default = _default;
 
 /***/ }),
 /* 40 */
-/*!*********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/config/config.js ***!
-  \*********************************************************************/
+/*!****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/config/config.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11598,9 +11593,9 @@ var version = '1.8.3';var _default =
 
 /***/ }),
 /* 41 */
-/*!*********************************************************************!*\
-  !*** H:/vote_sssh/vote/node_modules/uview-ui/libs/config/zIndex.js ***!
-  \*********************************************************************/
+/*!****************************************************************!*\
+  !*** D:/work/vote/node_modules/uview-ui/libs/config/zIndex.js ***!
+  \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
