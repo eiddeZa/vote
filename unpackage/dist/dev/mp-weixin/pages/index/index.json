@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "投票吧",
+  "usingComponents": {
+    "u-swiper": "/node-modules/uview-ui/components/u-swiper/u-swiper",
+    "u-empty": "/node-modules/uview-ui/components/u-empty/u-empty",
+    "u-tabbar": "/node-modules/uview-ui/components/u-tabbar/u-tabbar"
+  }
+}

@@ -1,0 +1,58 @@
+{
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "投票吧"
+			}
+		}, {
+			"path": "pages/issue/issue",
+			"style": {
+				"navigationBarTitleText": "发布",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#909399",
+		"selectedColor": "#f47347",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/image/indexIcon.png",
+				"selectedIconPath": "static/image/indexSelectedIcon.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/issue/issue",
+				"iconPath": "static/image/addIcon.png",
+				"selectedIconPath": "static/image/addSelectedIcon.png",
+				"text": "发布"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/image/mineIcon.png",
+				"selectedIconPath": "static/image/mineSelectedIcon.png",
+				"text": "我的"
+			}
+		]
+	}
+}
