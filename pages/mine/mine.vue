@@ -2,7 +2,7 @@
 	<view class="mine_box">
 		<view class="mine_bgc">
 			<view class="mine_info">
-				<view class="userInfo_box">
+				<view class="userInfo_box" @click="handleLogin">
 					<u-avatar :src="src" mode="square" size="large" class="userAvatar"></u-avatar>
 					<view class="user_info">
 						<view class="userName">we can</view>
@@ -58,7 +58,16 @@ export default {
 	onLoad() {
 		this.tabs = this.$store.state.tabbarList;
 	},
-	methods: {}
+	methods: {
+		handleLogin() {
+			console.log('11111');
+			uni.navigateTo({
+				url: '/pages/login/login',
+				animationType: 'pop-in',
+				animationDuration: 200
+			});
+		}
+	}
 };
 </script>
 

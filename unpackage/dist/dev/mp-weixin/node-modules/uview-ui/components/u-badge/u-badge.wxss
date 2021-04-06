@@ -36,7 +36,8 @@
           align-items: center;
   line-height: 24rpx;
   padding: 4rpx 8rpx;
-  border-radius: 100rpx;
+  -webkit-border-radius: 100rpx;
+          border-radius: 100rpx;
   z-index: 9;
 }
 .u-badge--bg--primary.data-v-662d25bf {
@@ -57,7 +58,8 @@
 .u-badge-dot.data-v-662d25bf {
   height: 16rpx;
   width: 16rpx;
-  border-radius: 100rpx;
+  -webkit-border-radius: 100rpx;
+          border-radius: 100rpx;
   line-height: 1;
 }
 .u-badge-mini.data-v-662d25bf {

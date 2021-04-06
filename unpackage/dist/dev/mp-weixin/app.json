@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/issue/issue",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/login/login"
   ],
   "subPackages": [],
   "window": {
@@ -37,6 +38,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap51.json"
+  "usingComponents": {}
 }

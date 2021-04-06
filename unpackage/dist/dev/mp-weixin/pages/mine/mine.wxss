@@ -35,7 +35,8 @@
   margin-bottom: 120rpx;
 }
 .mine_bgc .mine_info {
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
   height: 390rpx;
   background: #ffffff;
 }
@@ -73,7 +74,8 @@
   padding: 0 30rpx 30rpx;
 }
 .cellListBox .cellList {
-  border-radius: 10rpx !important;
+  -webkit-border-radius: 10rpx !important;
+          border-radius: 10rpx !important;
   overflow: hidden;
 }
 

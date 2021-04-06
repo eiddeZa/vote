@@ -25,7 +25,8 @@
 /* 透明度 */
 /* 文章场景相关 */
 .u-grid-item.data-v-99a45d26 {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background: #fff;
 
   display: -webkit-box;

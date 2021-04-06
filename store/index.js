@@ -24,13 +24,14 @@ const store = new Vuex.Store({
 							text: '我的',
 							pagePath: "/pages/mine/mine"
 						},
-					]
+					],
+					
 	},
 	mutations: {
 		 //更新德卡返回code 用于德卡返回code
 		        updated_DK_callback(state, DK_callback) {
 		            state.DK_callback = DK_callback
-		        },
+		        }
 	},
 	actions: {
 

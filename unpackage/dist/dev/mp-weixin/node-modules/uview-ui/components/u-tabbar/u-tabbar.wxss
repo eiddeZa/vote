@@ -25,7 +25,8 @@
 /* 透明度 */
 /* 文章场景相关 */
 .u-fixed-placeholder.data-v-3426a5b2 {
-  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
 }
 .u-tabbar__content.data-v-3426a5b2 {
 
@@ -46,10 +47,12 @@
   left: 0;
   width: 100%;
   z-index: 998;
-  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
 }
 .u-tabbar__content__circle__border.data-v-3426a5b2 {
-  border-radius: 100%;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
   width: 110rpx;
   height: 110rpx;
   top: -48rpx;
@@ -61,7 +64,8 @@
           transform: translateX(-50%);
 }
 .u-tabbar__content__circle__border.data-v-3426a5b2:after {
-  border-radius: 100px;
+  -webkit-border-radius: 100px;
+          border-radius: 100px;
 }
 .u-tabbar__content__item.data-v-3426a5b2 {
   -webkit-box-flex: 1;
@@ -127,7 +131,8 @@
 .u-tabbar__content__circle__button.data-v-3426a5b2 {
   width: 90rpx;
   height: 90rpx;
-  border-radius: 100%;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
 
   display: -webkit-box;
   display: -webkit-flex;
