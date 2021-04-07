@@ -6,8 +6,8 @@ const crypto = require('crypto')
 const jwt = require('./jwt.js')
 
 const loginConfig = {
-	AppId: '', // 小程序AppId,
-	AppSecret: '' //微信小程序AppSecret
+	AppId: 'wx4920937850a307e6', // 小程序AppId,
+	AppSecret: 'f80f7efec3729093e48b9f5e922a6317' //微信小程序AppSecret
 }
 //用于用户数据库密码加密的密钥，使用一个比较长的随机字符串即可
 const passSecret = 'qwertyuiop'
@@ -24,22 +24,21 @@ exports.main = async (event, context) => {
 		grant_type: 'authorization_code'
 	}
 	console.log(data);
-
 	//向微信发送请求获取用户openId
 	const res = await uniCloud.httpclient.request('https://api.weixin.qq.com/sns/jscode2session', {
 		method: 'GET',
 		data,
 		dataType: 'json'
 	})
-	console.log(res);
-	const success = res.status === 200 && res.data && res.openid
+	console.log(res)
+	const success = res.status === 200 && res.data && res.data.openid
 	if (!success) {
 		return {
+			res,
 			status: -2,
 			msg: '微信登录信息获取失败'
 		}
 	}
-
 	const {
 		openid
 	} = res.data
@@ -52,7 +51,9 @@ exports.main = async (event, context) => {
 	const userInDB = await db.collection('wx_user').where({
 		openid
 	}).get()
-
+	
+	console.log("-------------")
+	console.log(new Data.now())
 	let userUpdateResult
 	if (userInDB.data && userInDB.data.length === 0) {
 		//没有该用户就新增

@@ -44,11 +44,9 @@
   padding: 30rpx 60rpx;
   overflow: hidden;
 }
-.mine_bgc .mine_info .userAvatar {
-  margin: 20rpx;
-}
 .mine_bgc .mine_info .userAvatar,
 .mine_bgc .mine_info .user_info {
+  margin: 20rpx;
   float: left;
 }
 .mine_bgc .mine_info .userName {

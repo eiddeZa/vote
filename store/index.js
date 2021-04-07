@@ -26,12 +26,23 @@ const store = new Vuex.Store({
 						},
 					],
 					
+					hasLogin: false,
+					user: null,
+					code:'',
+					
 	},
 	mutations: {
-		 //更新德卡返回code 用于德卡返回code
-		        updated_DK_callback(state, DK_callback) {
-		            state.DK_callback = DK_callback
-		        }
+		login(state, user) {
+			state.hasLogin = true;
+			state.user = user;
+		},
+		logout(state) {
+			state.hasLogin = false;
+			state.user = user;
+		},
+		setCode(state,code){
+			state.code = code;
+		}
 	},
 	actions: {
 

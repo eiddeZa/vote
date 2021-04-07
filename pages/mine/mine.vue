@@ -5,7 +5,7 @@
 				<view class="userInfo_box" @click="handleLogin">
 					<u-avatar :src="src" mode="square" size="large" class="userAvatar"></u-avatar>
 					<view class="user_info">
-						<view class="userName">we can</view>
+						<view class="userName">请登录</view>
 						<u-button class="syncBtn" :ripple="true" size="mini" shape="circle">同步微信资料</u-button>
 					</view>
 				</view>
@@ -52,7 +52,7 @@ export default {
 	data() {
 		return {
 			tabs: '',
-			src: 'https://img0.baidu.com/it/u=2291332875,175289127&fm=26&fmt=auto&gp=0.jpg'
+			src: ''
 		};
 	},
 	onLoad() {
@@ -60,9 +60,8 @@ export default {
 	},
 	methods: {
 		handleLogin() {
-			console.log('11111');
 			uni.navigateTo({
-				url: '/pages/login/login',
+				url: '../login/login',
 				animationType: 'pop-in',
 				animationDuration: 200
 			});
@@ -89,11 +88,9 @@ export default {
 			padding: 30rpx 60rpx;
 			overflow: hidden;
 		}
-		.userAvatar {
-			margin: 20rpx;
-		}
 		.userAvatar,
 		.user_info {
+			margin: 20rpx;
 			float: left;
 		}
 		.userName {
