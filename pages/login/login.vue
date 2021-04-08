@@ -33,50 +33,63 @@ export default {
 	methods: {
 		// 获取code
 		// https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html
-		async getCode() {
+		async getCode(userInfo) {
 			const app = this;
-				uni.login({
-					provider: 'weixin',
-					success(login) {
-						console.log(login);
-						uni.getUserInfo({
-							provider: 'weixin',
-							lang: 'zh_CN',
-							success(res) {
-								console.log(res);
-								let data = {
-									code: login.code,
-									signature: res.signature,
-									encrypted_data: res.encryptedData,
-									iv: res.iv,
-									userInfo: res.userInfo
-								};
-								console.log(data);
-								// 登录请求
-								uniCloud
-									.callFunction({
-										name: 'wx_login',
-										data: data
-									})
-									.then(res => {
-										console.log('微信授权成功', res);
-										// 显示登录成功
-										uni.showToast({
-										    title: res.result.msg,
-										    duration: 2000
-										});
+			uni.login({
+				provider: 'weixin',
+				success(login) {
+					console.log(login);
+					uni.getUserInfo({
+						provider: 'weixin',
+						lang: 'zh_CN',
+						success(res) {
+							console.log(res);
+							let data = {
+								code: login.code,
+								signature: res.signature,
+								encrypted_data: res.encryptedData,
+								iv: res.iv,
+								userInfo: userInfo
+							};
+							console.log(data);
+							// 登录请求
+							uniCloud
+								.callFunction({
+									name: 'wx_login',
+									data: data
+								})
+								.then(res => {
+									console.log('微信授权成功', res);
+									// 显示登录成功
+									uni.showToast({
+										title: res.result.msg,
+										duration: 2000,
+										icon: 'none'
+									});
+									if (res.result.status == 1) {
 										// 跳转回原页面
 										setTimeout(() => {
-											app.onNavigateBack();
-										}, 2000);
-									});
-							}
-						});
-					},
-					fail(err) {
-						console.log(err);
-					}
-				});
+											// app.onNavigateBack();
+											uni.switchTab({
+											    url: '/pages/index/index'
+											});
+										}, 500);
+										uni.setStorageSync('token', res.result.token);
+										uni.setStorageSync('userInfo', res.result.userInfo);
+									}
+								});
+						}
+					});
+				},
+				fail(err) {
+					console.log(err);
+					uni.showToast({
+						title: "登录失败",
+						duration: 2000,
+						icon: 'none'
+					});
+				}
+			});
 		},
 
 		// 获取微信用户信息(新版)
@@ -89,12 +102,17 @@ export default {
 					success({ userInfo }) {
 						console.log('用户同意了授权');
 						console.log('userInfo：', userInfo);
-						app.getCode();
+						app.getCode(userInfo);
 						// 授权成功事件
 						// app.onAuthSuccess(userInfo);
 					},
 					fail() {
 						console.log('用户拒绝了授权');
+						uni.showToast({
+							title: "登录失败",
+							duration: 2000,
+							icon: 'none'
+						});
 					}
 				});
 		},

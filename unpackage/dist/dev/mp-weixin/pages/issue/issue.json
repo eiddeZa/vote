@@ -2,6 +2,14 @@
   "navigationBarTitleText": "发布",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "u-form": "/node-modules/uview-ui/components/u-form/u-form",
+    "u-form-item": "/node-modules/uview-ui/components/u-form-item/u-form-item",
+    "u-input": "/node-modules/uview-ui/components/u-input/u-input",
+    "u-checkbox-group": "/node-modules/uview-ui/components/u-checkbox-group/u-checkbox-group",
+    "u-checkbox": "/node-modules/uview-ui/components/u-checkbox/u-checkbox",
+    "u-radio-group": "/node-modules/uview-ui/components/u-radio-group/u-radio-group",
+    "u-radio": "/node-modules/uview-ui/components/u-radio/u-radio",
+    "u-switch": "/node-modules/uview-ui/components/u-switch/u-switch",
     "u-tabbar": "/node-modules/uview-ui/components/u-tabbar/u-tabbar"
   }
 }

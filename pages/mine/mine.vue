@@ -5,7 +5,7 @@
 				<view class="userInfo_box" @click="handleLogin">
 					<u-avatar :src="src" mode="square" size="large" class="userAvatar"></u-avatar>
 					<view class="user_info">
-						<view class="userName">请登录</view>
+						<view class="userName"  @click="handleLogin">{{userName}}</view>
 						<u-button class="syncBtn" :ripple="true" size="mini" shape="circle">同步微信资料</u-button>
 					</view>
 				</view>
@@ -52,19 +52,29 @@ export default {
 	data() {
 		return {
 			tabs: '',
-			src: ''
+			src: '',
+			userName:"请登录",
+			user:''
 		};
 	},
 	onLoad() {
 		this.tabs = this.$store.state.tabbarList;
+		this.user = uni.getStorageSync('userInfo');
+			console.log(this.user );
+		if (this.user) {
+			this.src=this.user.avatarUrl;
+			this.userName=this.user.nickName;
+		}
 	},
 	methods: {
 		handleLogin() {
-			uni.navigateTo({
-				url: '../login/login',
-				animationType: 'pop-in',
-				animationDuration: 200
-			});
+			if(this.user=="" || this.user==null){
+				uni.redirectTo({
+					url: '../login/login',
+					animationType: 'pop-in',
+					animationDuration: 200
+				});
+			}
 		}
 	}
 };
