@@ -35,20 +35,39 @@ export default {
 		this.tabs = this.$store.state.tabbarList;
 		console.log(this.$store.state.tabbarList);
 								
-		/* uni.login({
-			provider: 'weixin',
-			success: function(loginRes) {
-				console.log(loginRes.authResult);
-				// 获取用户信息
-				uni.getUserInfo({
-					provider: 'weixin',
-					success: function(infoRes) {
-						console.log(infoRes);
-						console.log('用户昵称为：' + infoRes.userInfo.nickName);
-					}
-				});
-			}
-		}); */
+		let arr=[
+			{
+				name:"李1",
+				FullPrice:1
+			},
+			{
+				name:"李2",
+				FullPrice:1
+			},
+			{
+				name:"李3",
+				FullPrice:2
+			},
+			{
+				name:"李4",
+				FullPrice:2
+			},
+			{
+				name:"李5",
+				FullPrice:6
+			},
+		];
+		
+		const fn =(list)=>{
+			const result=[];
+			const map =new Map();
+			list.forEach((item)=>{
+					map.set(item.FullPrice,item);
+			})
+			map.forEach((value,key) =>result.push(value));
+			return result;
+		};
+		console.log(fn(arr));
 	},
 	methods: {
 				theFourth() {
