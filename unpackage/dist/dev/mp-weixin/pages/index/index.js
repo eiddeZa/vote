@@ -159,7 +159,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -178,8 +178,7 @@ var _default =
 {
   data: function data() {
     return {
-      list: [
-      {
+      list: [{
         image: 'https://cdn.uviewui.com/uview/swiper/1.jpg' },
 
       {
@@ -196,8 +195,7 @@ var _default =
     this.tabs = this.$store.state.tabbarList;
     console.log(this.$store.state.tabbarList);
 
-    var arr = [
-    {
+    var arr = [{
       name: "李1",
       FullPrice: 1 },
 
@@ -229,51 +227,41 @@ var _default =
       return result;
     };
     console.log(fn(arr));
+    uniCloud.callFunction({
+      name: "get_votelist",
+      data: {
+        openid: "123",
+        paging: {
+          page: 1,
+          limit: 5 } },
+
+
+      success: function success(res) {
+        console.log(res);
+        /* uni.hideLoading();
+                          if (res.result.code == 200) {
+                          	uni.showToast({
+                          		title: res.result.msg,
+                          		duration: 2000
+                          	});
+                          } else {
+                          	this.$refs.uToast.show({
+                          		title: res.result.msg,
+                          		type: 'error',
+                          		position: 'top'
+                          	});
+                          } */
+      },
+      fail: function fail(error) {
+        console.log(err);
+        /* uni.hideLoading();
+                          */
+      } });
+
+
   },
-  methods: {
-    theFourth: function theFourth() {
-      uni.authorize({
-        scope: 'scope.userLocation',
-        success: function success(res) {
-          console.log(res);
-        },
-        fail: function fail(err) {
-          console.log(err);
-        } });
-
-      var that = this;
-      uni.getProvider({
-        service: 'oauth',
-        success: function success(res) {
-          console.log(res.provider);
-          //支持微信、qq和微博等
-          if (~res.provider.indexOf('weixin')) {
-            uni.login({
-              provider: 'weixin',
-              success: function success(loginRes) {
-                // loginRes.code;
-                var code = loginRes.code;
-                // console.log(code)
-                // code=1314;
-                // 获取用户信息
-                uni.getUserInfo({
-                  provider: 'weixin',
-                  success: function success(infoRes) {
-                    console.log('-------获取微信用户所有-----');
-                    var infoRess = infoRes.userInfo;
-                    that.userImage = infoRess.avatarUrl;
-                    that.usertitle_1 = infoRess.nickName;
-                    that.userUrl = false;
-                    console.log(infoRess);
-                  } });
-
-              } });
-
-          }
-        } });
-
-    } } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+  methods: {} };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 72)["default"]))
 
 /***/ }),
 

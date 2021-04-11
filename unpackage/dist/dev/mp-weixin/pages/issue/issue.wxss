@@ -35,14 +35,16 @@ page {
 .titleOption {
   font-weight: 300;
   color: #FFFFFF;
-  font-size: 36rpx;
-  text-shadow: 0px 0px 5px #000;
-  margin: 20rpx;
+  font-size: 34rpx;
+  text-shadow: 0px 0px 2px #000;
+  margin: 14rpx 20rpx;
 }
 .voteOptionContent .voteOptionContentTit {
   padding: 0;
 }
-.voteOptionContent .u-input,
+.voteOptionContent .u-input {
+  margin-left: 10rpx;
+}
 .voteOptionContent .addItem {
   margin-left: 20rpx;
 }
@@ -54,5 +56,13 @@ page {
   -webkit-box-flex: 0 !important;
   -webkit-flex: none !important;
           flex: none !important;
+}
+.custom-style {
+  background: #f16131 !important;
+  color: #ffffff !important;
+}
+.custom-style .u-btn--default {
+  background: #f16131 !important;
+  color: #ffffff !important;
 }
 

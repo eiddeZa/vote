@@ -2,12 +2,12 @@
 	<view>
 		<view class="content_1">
 			<u-form label-position="top">
-				<u-form-item left-icon="pushpin-fill" :left-icon-style="{fontSize:'18px',color:'#f16131'}" label="活动标题"
-					:label-style="{fontSize:'18px',fontWeight:'bold'}">
+				<u-form-item left-icon="pushpin-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="活动标题"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<u-input v-model="obj.activityTitle" maxlength="5000" placeholder="请输入活动标题" />
 				</u-form-item>
-				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'18px',color:'#f16131'}" label="投票介绍"
-					:label-style="{fontSize:'18px',fontWeight:'bold'}">
+				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票介绍"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<u-input v-model="obj.voteIntroduce" maxlength="5000" placeholder="请输入投票介绍" />
 				</u-form-item>
 			</u-form>
@@ -18,12 +18,15 @@
 		<view class="content_1 voteOptionContent">
 			<u-form label-position="top">
 				<u-form-item class="voteOptionContentTit" left-icon="grid-fill"
-					:left-icon-style="{fontSize:'18px',color:'#f16131'}" label="投票选项"
-					:label-style="{fontSize:'18px',fontWeight:'bold'}">
+					:left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票选项"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 				</u-form-item>
 				<u-form-item v-for="item,index in obj.voteItemlist" :key="index">
-					<u-icon name="minus-circle" color="#f16131" size="32" @click="deleteItem(index)"></u-icon>
-					<u-input class="u-input" v-model="item.content" maxlength="5000" placeholder="请输入投票选项" />
+					<view style="display: flex;width: 100%;" >
+						<u-icon name="minus-circle" color="#f16131" size="32" @click="deleteItem(index)"></u-icon>
+						<u-input class="u-input" v-model="item.content" maxlength="5000"
+							placeholder="请输入投票选项" />
+					</view>
 				</u-form-item>
 				<u-form-item>
 					<view @click="addItem()" style="width:100%;">
@@ -38,20 +41,20 @@
 		</view>
 		<view class="content_1">
 			<u-form class="voteRule">
-				<u-form-item left-icon="pushpin-fill" :left-icon-style="{fontSize:'18px',color:'#f16131'}"
-					label="投票开始时间" :label-style="{fontSize:'18px',fontWeight:'bold'}">
+				<u-form-item left-icon="pushpin-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}"
+					label="投票开始时间" :label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<view style="width:100%;text-align: end;" @click="ShowStart()">
 						<text>{{obj.startTime}}</text>
 					</view>
 				</u-form-item>
-				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'18px',color:'#f16131'}"
-					label="投票结束时间" :label-style="{fontSize:'18px',fontWeight:'bold'}">
+				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}"
+					label="投票结束时间" :label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<view style="width:100%;text-align: end;" @click="ShowEnd()">
 						<text>{{obj.endTime}}</text>
 					</view>
 				</u-form-item>
-				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'18px',color:'#f16131'}" label="投票次数"
-					:label-style="{fontSize:'18px',fontWeight:'bold'}">
+				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票次数"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<view style="width:100%;text-align: end;" @click="ShowNun()">
 						<text>{{obj.voteMoreTxt}}</text>
 						<u-icon name="arrow-right" color="#f16131" size="32"></u-icon>
@@ -60,10 +63,7 @@
 			</u-form>
 		</view>
 		<view class="content_1" style="padding: 20rpx 0;">
-			<u-button shape="circle" :custom-style="{
-			background:'#f16131', // 注意驼峰命名，并且值必须用引号包括，因为这是对象
-			color: '#ffffff'
-		}" :ripple="true">发布投票</u-button>
+			<u-button shape="circle" class="custom-style" @click="submitData" :ripple="true">发布投票</u-button>
 		</view>
 
 		<!-- 弹窗 -->
@@ -280,18 +280,19 @@
 					startTime: "2020-04-11 12:00",
 					endTime: "2020-04-11 12:00",
 					voteMoreTxt: "总共1次",
-					voteMore: "1"
-				}
-			};
+					voteMore: "1",
+					openid: "123",
+					voteType:"textVote"
+				},
+			}
 		},
 		onLoad() {
 			this.tabs = this.$store.state.tabbarList;
-			console.log(this.obj)
 		},
 		methods: {
 			addItem() {
 				this.obj.voteItemlist.push({
-					index: this.obj.voteItemlist + 1,
+					index: this.obj.voteItemlist.length + 1,
 					content: ""
 				});
 				console.log(this.obj.voteItemlist)
@@ -317,18 +318,102 @@
 				this.nunShow = true;
 			},
 			confirmStartTime(obj) {
-				this.obj.startTime=`${obj.year}-${obj.month}-${obj.day} ${obj.hour}:${obj.minute}`;
-				console.log(obj)
+				this.obj.startTime = `${obj.year}-${obj.month}-${obj.day} ${obj.hour}:${obj.minute}`;
 			},
 			confirmEndTime(obj) {
-				this.obj.endTime=`${obj.year}-${obj.month}-${obj.day} ${obj.hour}:${obj.minute}`;
-				console.log(obj)
+				this.obj.endTime = `${obj.year}-${obj.month}-${obj.day} ${obj.hour}:${obj.minute}`;
 			},
 			confirmNum(obj) {
-				this.obj.voteMoreTxt=`${obj[0].label}${obj[1].label}`;
-				this.obj.voteMore=obj[1].value;
-				console.log(obj)
+				this.obj.voteMoreTxt = `${obj[0].label}${obj[1].label}`;
+				this.obj.voteMore = obj[1].value;
+			},
+			submitData() {
+				uni.showLoading({
+					title: '发布中'
+				});
+				if (this.formVerify()) {
+					// this.obj.openid = uni.getStorageSync('userInfo').openid;
+					uniCloud.callFunction({
+						name: "add_votelist",
+						data: this.obj,
+						success(res) {
+							uni.hideLoading();
+							if (res.result.code == 200) {
+								uni.showToast({
+									title: res.result.msg,
+									duration: 2000
+								});
+								setTimeout(() => {
+									// app.onNavigateBack();
+									uni.switchTab({
+									    url: '/pages/index/index'
+									});
+								}, 500);
+							} else {
+								this.$refs.uToast.show({
+									title: res.result.msg,
+									type: 'error',
+									position: 'top'
+								});
+							}
+						},
+						fail(error) {
+							uni.hideLoading();
+							this.$refs.uToast.show({
+								title: '发布失败,请稍后重试！',
+								type: 'error',
+								position: 'top'
+							});
+							console.log(error)
+						}
+					})
+				} else {
+					uni.hideLoading();
+				}
+			},
+			formVerify() {
+				for (let i = 0; i < this.obj.voteItemlist.length; i++) {
+					if (this.obj.voteItemlist[i].content == "") {
+						this.$refs.uToast.show({
+							title: `请填写第${i+1}个投票选项`,
+							type: 'error',
+							position: 'top'
+						});
+						return false;
+					}
+				}
+				if (this.obj.activityTitle == "") {
+					this.$refs.uToast.show({
+						title: `请填写活动标题`,
+						type: 'error',
+						position: 'top'
+					});
+					return false;
+				} else if (this.obj.voteIntroduce == "") {
+					this.$refs.uToast.show({
+						title: `请填写投票介绍`,
+						type: 'error',
+						position: 'top'
+					});
+					return false;
+				} else if (this.compare(this.obj.startTime, this.obj.endTime) == false) {
+					this.$refs.uToast.show({
+						title: `投票开始时间不能大于结束时间`,
+						type: 'error',
+						position: 'top'
+					});
+					return false;
+				}
+				return true;
+			},
+			compare(date1, date2) {
+				var oDate1 = new Date(date1);
+				var oDate2 = new Date(date2);
+				if (oDate1.getTime() > oDate2.getTime()) {
+					return false;
+				}
 			}
+
 		}
 	};
 </script>
@@ -347,9 +432,9 @@
 	.titleOption {
 		font-weight: 300;
 		color: #FFFFFF;
-		font-size: 36rpx;
-		text-shadow: 0px 0px 5px #000;
-		margin: 20rpx;
+		font-size: 34rpx;
+		text-shadow: 0px 0px 2px #000;
+		margin: 14rpx 20rpx;
 	}
 
 	.voteOptionContent {
@@ -357,7 +442,10 @@
 			padding: 0;
 		}
 
-		.u-input,
+		.u-input {
+			margin-left: 10rpx;
+		}
+
 		.addItem {
 			margin-left: 20rpx;
 		}
@@ -373,6 +461,16 @@
 		/deep/.u-form-item--left {
 			width: auto !important;
 			flex: none !important;
+		}
+	}
+
+	.custom-style {
+		background: #f16131 !important;
+		color: #ffffff !important;
+
+		/deep/ .u-btn--default {
+			background: #f16131 !important;
+			color: #ffffff !important;
 		}
 	}
 </style>
