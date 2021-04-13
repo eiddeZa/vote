@@ -22,27 +22,24 @@
 					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 				</u-form-item>
 				<u-form-item v-for="item,index in obj.voteItemlist" :key="index">
-					<view style="display: flex;align-items: center;  width: 100%;" >
+					<view style="display:flex;align-items: center;width: 100%;">
 						<!-- <view class="" style="width: 100px;height: 100px;"> -->
-							<view class="cu-form-group">
-									<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
-										:data-url="imgList[index]">
-										<image :src="imgList[index]" mode="aspectFill"></image>
-										<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
-											<text class='cuIcon-close'></text>
-										</view>
-									</view>
-									<view class="solids" @tap="ChooseImage" v-if="imgList.length<4" style="width:100%;height: 100%;display: flex;justify-content: center;align-items: center;"> 
-										<text class='cuIcon-cameraadd' style="font-size: 60rpx;"></text>
-									</view>
-							</view> 
+						<view class="cu-form-group">
+							<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
+								:data-url="imgList[index]">
+								<image :src="imgList[index]" style="width: 100%;height: 100%;" mode="aspectFill">
+								</image>
+								<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+									<text class='cuIcon-close'></text>
+								</view>
+							</view>
+							<view class="solids" @tap="ChooseImage" v-if="imgList.length<1">
+								<text class='cuIcon-cameraadd' style="font-size: 60rpx;"></text>
+							</view>
+						</view>
 						<!-- </view> -->
-						
-						<u-upload :before-upload="beforeUpload"></u-upload>
-						
-						<u-input class="u-input" v-model="item.content" 
-							style="margin-right: 5px;border-bottom: 1px solid #dcdfe6;"
-						 maxlength="5000"
+						<u-input class="u-input" v-model="item.content"
+							style="margin-right: 5px;border-bottom: 1px solid #dcdfe6;width: 100%;" maxlength="5000"
 							placeholder="请输入投票选项" />
 						<u-icon name="minus-circle" color="#f16131" size="32" @click="deleteItem(index)"></u-icon>
 					</view>
@@ -294,18 +291,18 @@
 						{
 							index: 2,
 							content: ""
-						}
+						} 
 					],
 					startTime: "2020-04-11 12:00",
 					endTime: "2020-04-11 12:00",
 					voteMoreTxt: "总共1次",
 					voteMore: "1",
 					openid: "123",
-					voteType:"textVote"
+					voteType: "textVote"
 				},
 				// 图片数组
-								imgList: [],
-								imgDataList: [],
+				imgList: [],
+				imgDataList: [],
 			}
 		},
 		onLoad() {
@@ -368,7 +365,7 @@
 								setTimeout(() => {
 									// app.onNavigateBack();
 									uni.switchTab({
-									    url: '/pages/index/index'
+										url: '/pages/index/index'
 									});
 								}, 500);
 							} else {

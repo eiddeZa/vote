@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/issue/issue",
     "pages/mine/mine",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/textVote/textVote"
   ],
   "subPackages": [],
   "window": {
@@ -39,5 +40,5 @@
     ]
   },
   "usingComponents": {},
-  "sitemapLocation": "sitemap45.json"
+  "sitemapLocation": "sitemap61.json"
 }
