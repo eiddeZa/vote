@@ -32,7 +32,16 @@
             }
             
         }
-		],
+		 ,{
+            "path" : "pages/textVote/textVote",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "文字投票",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

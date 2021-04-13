@@ -22,29 +22,10 @@
 					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 				</u-form-item>
 				<u-form-item v-for="item,index in obj.voteItemlist" :key="index">
-					<view style="display: flex;align-items: center;  width: 100%;" >
-						<!-- <view class="" style="width: 100px;height: 100px;"> -->
-							<view class="cu-form-group">
-									<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage"
-										:data-url="imgList[index]">
-										<image :src="imgList[index]" mode="aspectFill"></image>
-										<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
-											<text class='cuIcon-close'></text>
-										</view>
-									</view>
-									<view class="solids" @tap="ChooseImage" v-if="imgList.length<4" style="width:100%;height: 100%;display: flex;justify-content: center;align-items: center;"> 
-										<text class='cuIcon-cameraadd' style="font-size: 60rpx;"></text>
-									</view>
-							</view> 
-						<!-- </view> -->
-						
-						<u-upload :before-upload="beforeUpload"></u-upload>
-						
-						<u-input class="u-input" v-model="item.content" 
-							style="margin-right: 5px;border-bottom: 1px solid #dcdfe6;"
-						 maxlength="5000"
-							placeholder="请输入投票选项" />
+					<view style="display: flex;width: 100%;" >
 						<u-icon name="minus-circle" color="#f16131" size="32" @click="deleteItem(index)"></u-icon>
+						<u-input class="u-input" v-model="item.content" maxlength="5000"
+							placeholder="请输入投票选项" />
 					</view>
 				</u-form-item>
 				<u-form-item>
@@ -303,9 +284,6 @@
 					openid: "123",
 					voteType:"textVote"
 				},
-				// 图片数组
-								imgList: [],
-								imgDataList: [],
 			}
 		},
 		onLoad() {
@@ -434,41 +412,7 @@
 				if (oDate1.getTime() > oDate2.getTime()) {
 					return false;
 				}
-			},
-			// 选择图片
-			ChooseImage() {
-				uni.chooseImage({
-					count: 4, //默认9
-					sizeType: ['compressed'], //压缩图
-					sourceType: ['camera', 'album'],
-					success: (res) => {
-						if (this.imgList.length != 0) {
-							this.imgList = this.imgList.concat(res.tempFilePaths)
-						} else {
-							this.imgList = res.tempFilePaths
-						}
-					}
-				});
-			},
-			// 浏览图片
-			ViewImage(e) {
-				uni.previewImage({
-					urls: this.imgList,
-					current: e.currentTarget.dataset.url
-				});
-			},
-			//删除图片
-			DelImg(e) {
-				uni.showModal({
-					title: "提示",
-					content: "是否要删除这张图片",
-					success: res => {
-						if (res.confirm) {
-							this.imgList.splice(e.currentTarget.dataset.index, 1)
-						}
-					}
-				})
-			},
+			}
 
 		}
 	};
