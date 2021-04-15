@@ -382,7 +382,7 @@ export default {
         endTime: "2020-04-11 12:00",
         voteMoreTxt: "总共1次",
         voteMore: "1",
-        openid: "123",
+        openid: "0910",
         voteType: "textVote",
       },
     };
@@ -527,27 +527,27 @@ export default {
         const res = await uniCloud.uploadFile({
           filePath: this.obj.voteItemlist[i].imgList[0],
           cloudPath: this.obj.voteItemlist[i].imgList[0] + ".jpg",
-          success(res) {
-            that.obj.voteItemlist[i].imgList = [];
-            that.obj.voteItemlist[i].imgList.push(res.fileID);
-            console.log(res);
-          },
         });
+        if (res) {
+          that.obj.voteItemlist[i].imgList = [];
+          that.obj.voteItemlist[i].imgList.push(res.fileID);
+          console.log(res);
+        }
       }
     },
     //提交
-    submitData() {
-    //   this.uploadingImg();
-    //   return false;
+    async submitData() {
       uni.showLoading({
         title: "发布中",
       });
       if (this.formVerify()) {
+        await this.uploadingImg();
         // this.obj.openid = uni.getStorageSync('userInfo').openid;
-        uniCloud.callFunction({
-          name: "add_votelist",
+        await uniCloud.callFunction({
+          name: "add_ImageTextVote",
           data: this.obj,
           success(res) {
+            console.log(res);
             uni.hideLoading();
             if (res.result.code == 200) {
               uni.showToast({
