@@ -98,8 +98,14 @@ try {
     uSwiper: function() {
       return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-swiper/u-swiper */ "node-modules/uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! uview-ui/components/u-swiper/u-swiper.vue */ 88))
     },
+    uIcon: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 132))
+    },
     uEmpty: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-empty/u-empty */ "node-modules/uview-ui/components/u-empty/u-empty").then(__webpack_require__.bind(null, /*! uview-ui/components/u-empty/u-empty.vue */ 95))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-empty/u-empty */ "node-modules/uview-ui/components/u-empty/u-empty").then(__webpack_require__.bind(null, /*! uview-ui/components/u-empty/u-empty.vue */ 267))
+    },
+    uLoadmore: function() {
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 95))
     },
     uTabbar: function() {
       return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabbar/u-tabbar.vue */ 102))
@@ -159,7 +165,25 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -178,90 +202,89 @@ var _default =
 {
   data: function data() {
     return {
-      list: [{
-        image: 'https://cdn.uviewui.com/uview/swiper/1.jpg' },
+      slideShowlist: [{
+        image: "https://cdn.uviewui.com/uview/swiper/1.jpg" },
 
       {
-        image: 'https://cdn.uviewui.com/uview/swiper/2.jpg' },
+        image: "https://cdn.uviewui.com/uview/swiper/2.jpg" },
 
       {
-        image: 'https://cdn.uviewui.com/uview/swiper/3.jpg' }],
+        image: "https://cdn.uviewui.com/uview/swiper/3.jpg" }],
 
 
-      tabs: '' };
+      tabs: "",
+      activityList: [],
+      page: 1,
+      status: "loadmore",
+      iconType: "flower",
+      loadText: {
+        loadmore: "轻轻上拉",
+        loading: "努力加载中",
+        nomore: "没有更多了" } };
+
 
   },
   onLoad: function onLoad() {
     this.tabs = this.$store.state.tabbarList;
-    console.log(this.$store.state.tabbarList);
-
-    var arr = [{
-      name: "李1",
-      FullPrice: 1 },
-
-    {
-      name: "李2",
-      FullPrice: 1 },
-
-    {
-      name: "李3",
-      FullPrice: 2 },
-
-    {
-      name: "李4",
-      FullPrice: 2 },
-
-    {
-      name: "李5",
-      FullPrice: 6 }];
-
-
-
-    var fn = function fn(list) {
-      var result = [];
-      var map = new Map();
-      list.forEach(function (item) {
-        map.set(item.FullPrice, item);
-      });
-      map.forEach(function (value, key) {return result.push(value);});
-      return result;
-    };
-    console.log(fn(arr));
-    uniCloud.callFunction({
-      name: "get_votelist",
-      data: {
-        openid: "123",
-        paging: {
-          page: 1,
-          limit: 5 } },
-
-
-      success: function success(res) {
-        console.log(res);
-        /* uni.hideLoading();
-                          if (res.result.code == 200) {
-                          	uni.showToast({
-                          		title: res.result.msg,
-                          		duration: 2000
-                          	});
-                          } else {
-                          	this.$refs.uToast.show({
-                          		title: res.result.msg,
-                          		type: 'error',
-                          		position: 'top'
-                          	});
-                          } */
-      },
-      fail: function fail(error) {
-        console.log(err);
-        /* uni.hideLoading();
-                          */
-      } });
-
-
+    //查询活动列表
+    this.getList();
   },
-  methods: {} };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 14)["default"]))
+  // 监听下拉刷新
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.activityList = [];
+    this.getList();
+  },
+  onReachBottom: function onReachBottom(e) {
+    this.status = "loading";
+    this.getList();
+  },
+  methods: {
+    getList: function getList() {
+      var that = this;
+      uniCloud.callFunction({
+        name: "get_ImageTextVote",
+        data: {
+          openid: "0910",
+          paging: {
+            page: that.page,
+            limit: 5 } },
+
+
+        success: function success(res) {
+          console.log(res);
+          if (res.result.data) {
+            if (that.page === 1) {
+              uni.stopPullDownRefresh();
+            }
+            for (var i = 0; i < res.result.data.length; i++) {
+              that.activityList.push(res.result.data[i]);
+            }
+            that.page++;
+            that.status = "loadmore";
+            if (res.result.data.length < 5) {
+              that.status = "nomore";
+            }
+          }
+        },
+        fail: function fail(error) {
+          that.$operate.toast({ title: "网络请求错误！" });
+          console.log(err);
+        } });
+
+    },
+    goDetail: function goDetail(item) {
+      var detail = {
+        title: item.activityTitle,
+        _id: item._id };
+
+      console.log(detail);
+      uni.navigateTo({
+        url: "../detail/detail?detailDate=" +
+        encodeURIComponent(JSON.stringify(detail)) });
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 14)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

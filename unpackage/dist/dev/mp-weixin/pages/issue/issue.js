@@ -177,7 +177,86 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -278,7 +357,7 @@ var _default =
 {
   data: function data() {
     return {
-      tabs: '',
+      tabs: "",
       params: {
         year: true,
         month: true,
@@ -289,173 +368,176 @@ var _default =
       startTimeShow: false,
       endTimeShow: false,
       nunShow: false, //投票次数配置
-      numlist: [{
+      numlist: [
+      {
         value: 1,
-        label: '每天',
-        children: [{
+        label: "每天",
+        children: [
+        {
           value: 1,
-          label: '1次' },
+          label: "1次" },
 
         {
           value: 2,
-          label: '2次' },
+          label: "2次" },
 
         {
           value: 3,
-          label: '3次' },
+          label: "3次" },
 
         {
           value: 4,
-          label: '4次' },
+          label: "4次" },
 
         {
           value: 5,
-          label: '5次' },
+          label: "5次" },
 
         {
           value: 6,
-          label: '6次' },
+          label: "6次" },
 
         {
           value: 7,
-          label: '7次' },
+          label: "7次" },
 
         {
           value: 8,
-          label: '8次' },
+          label: "8次" },
 
         {
           value: 9,
-          label: '9次' },
+          label: "9次" },
 
         {
           value: 10,
-          label: '10次' },
+          label: "10次" },
 
         {
           value: 11,
-          label: '11次' },
+          label: "11次" },
 
         {
           value: 12,
-          label: '12次' },
+          label: "12次" },
 
         {
           value: 13,
-          label: '13次' },
+          label: "13次" },
 
         {
           value: 14,
-          label: '14次' },
+          label: "14次" },
 
         {
           value: 15,
-          label: '15次' },
+          label: "15次" },
 
         {
           value: 16,
-          label: '16次' },
+          label: "16次" },
 
         {
           value: 17,
-          label: '17次' },
+          label: "17次" },
 
         {
           value: 18,
-          label: '18次' },
+          label: "18次" },
 
         {
           value: 19,
-          label: '19次' },
+          label: "19次" },
 
         {
           value: 20,
-          label: '20次' }] },
+          label: "20次" }] },
 
 
 
       {
         value: 2,
-        label: '总共',
-        children: [{
+        label: "总共",
+        children: [
+        {
           value: 1,
-          label: '1次' },
+          label: "1次" },
 
         {
           value: 2,
-          label: '2次' },
+          label: "2次" },
 
         {
           value: 3,
-          label: '3次' },
+          label: "3次" },
 
         {
           value: 4,
-          label: '4次' },
+          label: "4次" },
 
         {
           value: 5,
-          label: '5次' },
+          label: "5次" },
 
         {
           value: 6,
-          label: '6次' },
+          label: "6次" },
 
         {
           value: 7,
-          label: '7次' },
+          label: "7次" },
 
         {
           value: 8,
-          label: '8次' },
+          label: "8次" },
 
         {
           value: 9,
-          label: '9次' },
+          label: "9次" },
 
         {
           value: 10,
-          label: '10次' },
+          label: "10次" },
 
         {
           value: 11,
-          label: '11次' },
+          label: "11次" },
 
         {
           value: 12,
-          label: '12次' },
+          label: "12次" },
 
         {
           value: 13,
-          label: '13次' },
+          label: "13次" },
 
         {
           value: 14,
-          label: '14次' },
+          label: "14次" },
 
         {
           value: 15,
-          label: '15次' },
+          label: "15次" },
 
         {
           value: 16,
-          label: '16次' },
+          label: "16次" },
 
         {
           value: 17,
-          label: '17次' },
+          label: "17次" },
 
         {
           value: 18,
-          label: '18次' },
+          label: "18次" },
 
         {
           value: 19,
-          label: '19次' },
+          label: "19次" },
 
         {
           value: 20,
-          label: '20次' }] }],
+          label: "20次" }] }],
 
 
 
@@ -463,25 +545,25 @@ var _default =
       obj: {
         activityTitle: "",
         voteIntroduce: "",
-        voteItemlist: [{
+        voteItemlist: [
+        {
           index: 1,
-          content: "" },
+          content: "",
+          imgList: [] },
 
         {
           index: 2,
-          content: "" }],
+          content: "",
+          imgList: [] }],
 
 
         startTime: "2020-04-11 12:00",
         endTime: "2020-04-11 12:00",
         voteMoreTxt: "总共1次",
         voteMore: "1",
-        openid: "123",
-        voteType: "textVote" },
+        openid: "0910",
+        voteType: "textVote" } };
 
-      // 图片数组
-      imgList: [],
-      imgDataList: [] };
 
   },
   onLoad: function onLoad() {
@@ -491,16 +573,17 @@ var _default =
     addItem: function addItem() {
       this.obj.voteItemlist.push({
         index: this.obj.voteItemlist.length + 1,
-        content: "" });
+        content: "",
+        imgList: [] });
 
       console.log(this.obj.voteItemlist);
     },
     deleteItem: function deleteItem(index) {
       if (this.obj.voteItemlist.length == 2) {
         this.$refs.uToast.show({
-          title: '至少要有两个投票选项',
-          type: 'error',
-          position: 'top' });
+          title: "至少要有两个投票选项",
+          type: "error",
+          position: "top" });
 
         return false;
       }
@@ -525,57 +608,21 @@ var _default =
       this.obj.voteMoreTxt = "".concat(obj[0].label).concat(obj[1].label);
       this.obj.voteMore = obj[1].value;
     },
-    submitData: function submitData() {
-      uni.showLoading({
-        title: '发布中' });
-
-      if (this.formVerify()) {
-        // this.obj.openid = uni.getStorageSync('userInfo').openid;
-        uniCloud.callFunction({
-          name: "add_votelist",
-          data: this.obj,
-          success: function success(res) {
-            uni.hideLoading();
-            if (res.result.code == 200) {
-              uni.showToast({
-                title: res.result.msg,
-                duration: 2000 });
-
-              setTimeout(function () {
-                // app.onNavigateBack();
-                uni.switchTab({
-                  url: '/pages/index/index' });
-
-              }, 500);
-            } else {
-              this.$refs.uToast.show({
-                title: res.result.msg,
-                type: 'error',
-                position: 'top' });
-
-            }
-          },
-          fail: function fail(error) {
-            uni.hideLoading();
-            this.$refs.uToast.show({
-              title: '发布失败,请稍后重试！',
-              type: 'error',
-              position: 'top' });
-
-            console.log(error);
-          } });
-
-      } else {
-        uni.hideLoading();
-      }
-    },
+    //保单校验
     formVerify: function formVerify() {
       for (var i = 0; i < this.obj.voteItemlist.length; i++) {
-        if (this.obj.voteItemlist[i].content == "") {
+        if (this.obj.voteItemlist[i].imgList.length == 0) {
+          this.$refs.uToast.show({
+            title: "\u8BF7\u4E0A\u4F20\u7B2C".concat(i + 1, "\u9879\u7684\u56FE\u7247"),
+            type: "error",
+            position: "top" });
+
+          return false;
+        } else if (this.obj.voteItemlist[i].content == "") {
           this.$refs.uToast.show({
             title: "\u8BF7\u586B\u5199\u7B2C".concat(i + 1, "\u4E2A\u6295\u7968\u9009\u9879"),
-            type: 'error',
-            position: 'top' });
+            type: "error",
+            position: "top" });
 
           return false;
         }
@@ -583,22 +630,22 @@ var _default =
       if (this.obj.activityTitle == "") {
         this.$refs.uToast.show({
           title: "\u8BF7\u586B\u5199\u6D3B\u52A8\u6807\u9898",
-          type: 'error',
-          position: 'top' });
+          type: "error",
+          position: "top" });
 
         return false;
       } else if (this.obj.voteIntroduce == "") {
         this.$refs.uToast.show({
           title: "\u8BF7\u586B\u5199\u6295\u7968\u4ECB\u7ECD",
-          type: 'error',
-          position: 'top' });
+          type: "error",
+          position: "top" });
 
         return false;
       } else if (this.compare(this.obj.startTime, this.obj.endTime) == false) {
         this.$refs.uToast.show({
           title: "\u6295\u7968\u5F00\u59CB\u65F6\u95F4\u4E0D\u80FD\u5927\u4E8E\u7ED3\u675F\u65F6\u95F4",
-          type: 'error',
-          position: 'top' });
+          type: "error",
+          position: "top" });
 
         return false;
       }
@@ -612,37 +659,106 @@ var _default =
       }
     },
     // 选择图片
-    ChooseImage: function ChooseImage() {var _this = this;
+    ChooseImage: function ChooseImage(index) {var _this = this;
       uni.chooseImage({
         count: 4, //默认9
-        sizeType: ['compressed'], //压缩图
-        sourceType: ['camera', 'album'],
+        sizeType: ["compressed"], //压缩图
+        sourceType: ["camera", "album"],
         success: function success(res) {
-          if (_this.imgList.length != 0) {
-            _this.imgList = _this.imgList.concat(res.tempFilePaths);
+          if (_this.obj.voteItemlist[index].imgList.length != 0) {
+            _this.obj.voteItemlist[index].imgList = _this.obj.voteItemlist[
+            index].
+            imgList.concat(res.tempFilePaths);
           } else {
-            _this.imgList = res.tempFilePaths;
+            _this.obj.voteItemlist[index].imgList = res.tempFilePaths;
           }
         } });
 
     },
     // 浏览图片
-    ViewImage: function ViewImage(e) {
+    ViewImage: function ViewImage(index) {
       uni.previewImage({
-        urls: this.imgList,
-        current: e.currentTarget.dataset.url });
+        urls: this.obj.voteItemlist[index].imgList,
+        current: event.currentTarget.dataset.url });
 
     },
     //删除图片
-    DelImg: function DelImg(e) {var _this2 = this;
+    DelImg: function DelImg(index) {var _this2 = this;
       uni.showModal({
         title: "提示",
         content: "是否要删除这张图片",
         success: function success(res) {
           if (res.confirm) {
-            _this2.imgList.splice(e.currentTarget.dataset.index, 1);
+            _this2.obj.voteItemlist[index].imgList.splice(
+            event.currentTarget.dataset.index,
+            1);
+
           }
         } });
+
+    },
+    //上传图片
+    uploadingImg: function uploadingImg() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var arrar, that, i, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                arrar = _this3.obj.voteItemlist;
+                that = _this3;
+                i = 0;case 3:if (!(i < arrar.length)) {_context.next = 11;break;}_context.next = 6;return (
+
+                  uniCloud.uploadFile({
+                    filePath: _this3.obj.voteItemlist[i].imgList[0],
+                    cloudPath: _this3.obj.voteItemlist[i].imgList[0] + ".jpg" }));case 6:res = _context.sent;
+
+                if (res) {
+                  that.obj.voteItemlist[i].imgList = [];
+                  that.obj.voteItemlist[i].imgList.push(res.fileID);
+                  console.log(res);
+                }case 8:i++;_context.next = 3;break;case 11:case "end":return _context.stop();}}}, _callee);}))();
+
+    },
+    //提交
+    submitData: function submitData() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                uni.showLoading({
+                  title: "发布中" });if (!
+
+                _this4.formVerify()) {_context2.next = 8;break;}_context2.next = 4;return (
+                  _this4.uploadingImg());case 4:_context2.next = 6;return (
+
+                  uniCloud.callFunction({
+                    name: "add_ImageTextVote",
+                    data: _this4.obj,
+                    success: function success(res) {
+                      console.log(res);
+                      uni.hideLoading();
+                      if (res.result.code == 200) {
+                        uni.showToast({
+                          title: res.result.msg,
+                          duration: 2000 });
+
+                        setTimeout(function () {
+                          // app.onNavigateBack();
+                          uni.switchTab({
+                            url: "/pages/index/index" });
+
+                        }, 500);
+                      } else {
+                        this.$refs.uToast.show({
+                          title: res.result.msg,
+                          type: "error",
+                          position: "top" });
+
+                      }
+                    },
+                    fail: function fail(error) {
+                      uni.hideLoading();
+                      this.$refs.uToast.show({
+                        title: "发布失败,请稍后重试！",
+                        type: "error",
+                        position: "top" });
+
+                      console.log(error);
+                    } }));case 6:_context2.next = 9;break;case 8:
+
+
+                uni.hideLoading();case 9:case "end":return _context2.stop();}}}, _callee2);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 14)["default"]))

@@ -4,11 +4,9 @@ exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ', event)
 	const collection = db.collection('vote_list')
-	//,
-	
+	event.creatTime=Date.now()
 	let res = await collection.add({
-		event,
-		creatTime:Date.now()
+		...event,
 	})
 	if (res.id) {
 		//返回数据给客户端

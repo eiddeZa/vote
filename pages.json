@@ -6,7 +6,9 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "投票吧"
+				"navigationBarTitleText": "投票吧",
+				"enablePullDownRefresh":true
+
 			}
 		}, {
 			"path": "pages/issue/issue",
@@ -37,6 +39,15 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "文字投票",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/detail/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "详情",
                 "enablePullDownRefresh": false
             }
             

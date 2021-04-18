@@ -1,13 +1,31 @@
 <template>
 	<view class="content">
-		<u-swiper mode="rect" :list="list" duration="3000" bg-color="#f75360" :effect3d="true"></u-swiper>
+		<u-swiper mode="rect" :list="slideShowlist" duration="3000" bg-color="#f75360" :effect3d="true"></u-swiper>
 		<view class="hot_tit">
 			<image src="/static/image/hot.png" mode=""></image>
 			<text>热门活动</text>
 		</view>
-		<view class="content_vote">
+		<view v-for="(item, index) in activityList" :key="index" class="activityList"  @click="goDetail(item)">
+			<view class="activityImage">
+				<image :src="item.voteItemlist[0].imgList[0]" mode=""></image>
+			</view>
+			<view class="activityContent">
+				<view class="activityTit">
+					<u-icon class="iconz" color="#f16131" name="grid-fill" size="28"></u-icon>{{item.activityTitle}}
+				</view>
+				<view class="activityNum">
+					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>1999人参与已投票, 199999
+				</view>
+				<view class="activityEndTime">
+					<u-icon class="iconz" color="#f16131" name="clock-fill" size="28"></u-icon>{{item.endTime}}
+				</view>
+			</view>
+		</view>
+		<view class="content_vote" v-if="activityList.length==0">
 			<u-empty text="暂无数据" mode="list"></u-empty>
 		</view>
+		<u-loadmore v-else :status="status" :icon-type="iconType" :load-text="loadText" />
+
 
 		<u-tabbar :list="tabs" :mid-button="true" active-color="#f47347"></u-tabbar>
 	</view>
@@ -17,97 +35,95 @@
 	export default {
 		data() {
 			return {
-				list: [{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg'
+				slideShowlist: [{
+						image: "https://cdn.uviewui.com/uview/swiper/1.jpg",
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg'
+						image: "https://cdn.uviewui.com/uview/swiper/2.jpg",
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg'
-					}
+						image: "https://cdn.uviewui.com/uview/swiper/3.jpg",
+					},
 				],
-				tabs: ''
+				tabs: "",
+				activityList: [],
+				page: 1,
+				status: "loadmore",
+				iconType: "flower",
+				loadText: {
+					loadmore: "轻轻上拉",
+					loading: "努力加载中",
+					nomore: "没有更多了",
+				}
 			};
 		},
 		onLoad() {
 			this.tabs = this.$store.state.tabbarList;
-			console.log(this.$store.state.tabbarList);
-
-			let arr = [{
-					name: "李1",
-					FullPrice: 1
-				},
-				{
-					name: "李2",
-					FullPrice: 1
-				},
-				{
-					name: "李3",
-					FullPrice: 2
-				},
-				{
-					name: "李4",
-					FullPrice: 2
-				},
-				{
-					name: "李5",
-					FullPrice: 6
-				},
-			];
-
-			const fn = (list) => {
-				const result = [];
-				const map = new Map();
-				list.forEach((item) => {
-					map.set(item.FullPrice, item);
-				})
-				map.forEach((value, key) => result.push(value));
-				return result;
-			};
-			console.log(fn(arr));
-			uniCloud.callFunction({
-				name: "get_votelist",
-				data: {
-					openid: "123",
-					paging: {
-						page: 1,
-						limit: 5
-					}
-				},
-				success(res) {
-					console.log(res);
-					/* uni.hideLoading();
-					if (res.result.code == 200) {
-						uni.showToast({
-							title: res.result.msg,
-							duration: 2000
-						});
-					} else {
-						this.$refs.uToast.show({
-							title: res.result.msg,
-							type: 'error',
-							position: 'top'
-						});
-					} */
-				},
-				fail(error) {
-					console.log(err);
-					/* uni.hideLoading();
-					*/
-				}
-			})
-
+			//查询活动列表
+			this.getList();
+		},
+		// 监听下拉刷新
+		onPullDownRefresh() {
+			this.page = 1;
+			this.activityList = [];
+			this.getList();
+		},
+		onReachBottom(e) {
+			this.status = "loading";
+			this.getList();
 		},
 		methods: {
-
-		}
+			getList() {
+				let that = this;
+				uniCloud.callFunction({
+					name: "get_ImageTextVote",
+					data: {
+						openid: "0910",
+						paging: {
+							page: that.page,
+							limit: 5,
+						},
+					},
+					success(res) {
+						console.log(res);
+						if (res.result.data) {
+							if (that.page === 1) {
+								uni.stopPullDownRefresh();
+							}
+							for (let i = 0; i < res.result.data.length; i++) {
+								that.activityList.push(res.result.data[i]);
+							}
+							that.page++;
+							that.status = "loadmore";
+							if (res.result.data.length < 5) {
+								that.status = "nomore";
+							}
+						}
+					},
+					fail(error) {
+						that.$operate.toast({title:"网络请求错误！"})
+						console.log(error);
+					},
+				});
+			},
+			goDetail(item) {
+				let detail = {
+					title:item.activityTitle,
+					_id: item._id
+				};
+				console.log(detail);
+				uni.navigateTo({
+					url: "../detail/detail?detailDate=" +
+						encodeURIComponent(JSON.stringify(detail)),
+				});
+			},
+		},
 	};
 </script>
 
 <style lang="scss">
 	.content {
-		height: 100%;
+		min-height: 100%;
 		background: #ffffff;
 	}
 
@@ -122,5 +138,48 @@
 			height: 40rpx;
 			margin-right: 10rpx;
 		}
+	}
+
+	//
+	.activityList {
+		margin: 30rpx;
+		border-radius: 10rpx;
+		overflow: hidden;
+		box-shadow: #dedede 0px 0px 10px;
+
+		.activityImage {
+			width: 100%;
+			height: 360rpx;
+
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.activityContent {
+			padding: 16rpx 30rpx;
+
+			.iconz {
+				margin-right: 10rpx;
+			}
+
+			.activityTit {
+				font-size: 34rpx;
+				line-height: 60rpx;
+			}
+
+			.activityNum {
+				font-size: 32rpx;
+				line-height: 60rpx;
+			}
+
+			.activityEndTime {
+				line-height: 60rpx;
+				color: #919191;
+				font-size: 32rpx;
+			}
+		}
+
 	}
 </style>
