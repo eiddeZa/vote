@@ -87,7 +87,7 @@ export default {
 }
 .mine_bgc {
 	height: 330rpx;
-	background: #f75360;
+	background: #f16131;
 	padding: 30rpx;
 	margin-bottom: 120rpx;
 	.mine_info {
@@ -108,7 +108,7 @@ export default {
 		}
 		.syncBtn {
 			margin-top: 20rpx;
-			color: #f75360;
+			color: #f16131;
 		}
 	}
 }

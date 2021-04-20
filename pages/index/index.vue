@@ -1,6 +1,7 @@
 <template>
 	<view class="content">
-		<u-swiper mode="rect" :list="slideShowlist" duration="3000" bg-color="#f75360" :effect3d="true"></u-swiper>
+		<!--  bg-color="#f75360" -->
+		<u-swiper mode="rect" :list="slideShowlist" duration="3000" :effect3d="true"></u-swiper>
 		<view class="hot_tit">
 			<image src="/static/image/hot.png" mode=""></image>
 			<text>热门活动</text>

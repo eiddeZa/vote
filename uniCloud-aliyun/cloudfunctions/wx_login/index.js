@@ -43,13 +43,6 @@ exports.main = async (event, context) => {
 	let openidObj = {
 		openid
 	}
-	
-	console.log("--------------------");
-	console.log(await db.collection('wx_user'));
-	console.log("--------------------");
-	console.log(openid);
-	console.log("--------------------");
-	
 	const userInfo = event.userInfo
 	let tokenSecret = crypto.randomBytes(16).toString('hex'),
 		token = jwt.encode(openidObj, tokenSecret)
@@ -57,7 +50,6 @@ exports.main = async (event, context) => {
 		openid
 	}).get()
 	
-	console.log("-------------")
 	let userUpdateResult
 	if (userInDB.data && userInDB.data.length === 0) {
 		//没有该用户就新增
