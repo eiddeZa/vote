@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
 	// 查询
 	let res = await collection.where({
 		openid: event.openid
-	}).skip(skip).limit(limit).get();
+	}).skip(skip).limit(limit).orderBy("_id", "desc").get();
 	//返回数据给客户端
 	return res;
 };

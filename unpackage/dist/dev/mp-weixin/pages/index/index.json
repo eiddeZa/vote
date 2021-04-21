@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "投票吧",
+  "navigationBarTitleText": "迅投",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "u-swiper": "/node-modules/uview-ui/components/u-swiper/u-swiper",

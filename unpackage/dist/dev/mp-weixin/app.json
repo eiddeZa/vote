@@ -5,7 +5,9 @@
     "pages/mine/mine",
     "pages/login/login",
     "pages/textVote/textVote",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/ImageTextVote/ImageTextVote",
+    "pages/mineIssue/mineIssue"
   ],
   "subPackages": [],
   "window": {
@@ -40,6 +42,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap27.json"
+  "usingComponents": {}
 }

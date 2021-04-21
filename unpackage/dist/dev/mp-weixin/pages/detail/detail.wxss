@@ -63,7 +63,7 @@ page {
   color: #bababa;
 }
 .tit {
-  text-indent: 30rpx;
+  padding: 0 30rpx;
   font-size: 36rpx;
   margin-top: 60rpx;
 }

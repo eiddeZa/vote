@@ -34,6 +34,9 @@ export default {
 		// 获取code
 		// https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html
 		async getCode(userInfo) {
+			uni.showLoading({
+					title: '登录中'
+				});
 			const app = this;
 			uni.login({
 				provider: 'weixin',
@@ -60,6 +63,7 @@ export default {
 								})
 								.then(res => {
 									console.log('微信授权成功', res);
+									uni.hideLoading();
 									// 显示登录成功
 									uni.showToast({
 										title: res.result.msg,
@@ -82,6 +86,7 @@ export default {
 					});
 				},
 				fail(err) {
+					uni.hideLoading();
 					console.log(err);
 					uni.showToast({
 						title: "登录失败",

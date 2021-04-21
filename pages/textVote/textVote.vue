@@ -22,10 +22,9 @@
 					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 				</u-form-item>
 				<u-form-item v-for="item,index in obj.voteItemlist" :key="index">
-					<view style="display: flex;width: 100%;" >
+					<view style="display: flex;width: 100%;">
 						<u-icon name="minus-circle" color="#f16131" size="32" @click="deleteItem(index)"></u-icon>
-						<u-input class="u-input" v-model="item.content" maxlength="5000"
-							placeholder="请输入投票选项" />
+						<u-input class="u-input" v-model="item.content" maxlength="5000" placeholder="请输入投票选项" />
 					</view>
 				</u-form-item>
 				<u-form-item>
@@ -41,24 +40,28 @@
 		</view>
 		<view class="content_1">
 			<u-form class="voteRule">
-				<u-form-item left-icon="pushpin-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}"
-					label="投票开始时间" :label-style="{fontSize:'16px',fontWeight:'bold'}">
+				<u-form-item left-icon="clock-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票开始时间"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<view style="width:100%;text-align: end;" @click="ShowStart()">
 						<text>{{obj.startTime}}</text>
 					</view>
 				</u-form-item>
-				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}"
-					label="投票结束时间" :label-style="{fontSize:'16px',fontWeight:'bold'}">
+				<u-form-item left-icon="clock-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票结束时间"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<view style="width:100%;text-align: end;" @click="ShowEnd()">
 						<text>{{obj.endTime}}</text>
 					</view>
 				</u-form-item>
-				<u-form-item left-icon="edit-pen-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票次数"
+				<u-form-item left-icon="grid-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="投票次数"
 					:label-style="{fontSize:'16px',fontWeight:'bold'}">
 					<view style="width:100%;text-align: end;" @click="ShowNun()">
 						<text>{{obj.voteMoreTxt}}</text>
 						<u-icon name="arrow-right" color="#f16131" size="32"></u-icon>
 					</view>
+				</u-form-item>
+				<u-form-item left-icon="home-fill" :left-icon-style="{fontSize:'16px',color:'#f16131'}" label="是否在首页展示"
+					:label-style="{fontSize:'16px',fontWeight:'bold'}">
+					<u-switch slot="right" v-model="obj.switchVal"></u-switch>
 				</u-form-item>
 			</u-form>
 		</view>
@@ -75,15 +78,14 @@
 		<!-- 投票次数选择 -->
 		<u-select v-model="nunShow" mode="mutil-column-auto" :list="numlist" @confirm="confirmNum"></u-select>
 
-		<u-tabbar :list="tabs" :mid-button="true" active-color="#f47347"></u-tabbar>
 	</view>
 </template>
 
 <script>
+	var moment = require('moment');
 	export default {
 		data() {
 			return {
-				tabs: '',
 				params: {
 					year: true,
 					month: true,
@@ -277,18 +279,25 @@
 							content: ""
 						}
 					],
-					startTime: "2020-04-11 12:00",
-					endTime: "2020-04-11 12:00",
+					startTime: moment().format('YYYY-MM-DD HH:mm'),
+					endTime: moment().add({
+						y: 0,
+						M: 0,
+						d: 1,
+						h: 0,
+						m: 0
+					}).format('YYYY-MM-DD HH:mm'),
 					voteMoreTxt: "总共1次",
 					voteMore: "1",
-					openid: "123",
-					voteType:"textVote"
+					switchVal: true,
+					status: 1,
+					openid: "",
+					voteType: "textVote",
+					creatUserInfo: ""
 				},
 			}
 		},
-		onLoad() {
-			this.tabs = this.$store.state.tabbarList;
-		},
+		onLoad() {},
 		methods: {
 			addItem() {
 				this.obj.voteItemlist.push({
@@ -332,7 +341,9 @@
 					title: '发布中'
 				});
 				if (this.formVerify()) {
-					// this.obj.openid = uni.getStorageSync('userInfo').openid;
+					this.obj.creatUserInfo = uni.getStorageSync('userInfo');
+					this.obj.openid = uni.getStorageSync('userInfo').openid;
+					let app=this;
 					uniCloud.callFunction({
 						name: "add_votelist",
 						data: this.obj,
@@ -344,13 +355,14 @@
 									duration: 2000
 								});
 								setTimeout(() => {
+									app.clearData();
 									// app.onNavigateBack();
 									uni.switchTab({
-									    url: '/pages/index/index'
+										url: '/pages/index/index'
 									});
 								}, 500);
 							} else {
-								this.$refs.uToast.show({
+								app.$refs.uToast.show({
 									title: res.result.msg,
 									type: 'error',
 									position: 'top'
@@ -359,7 +371,7 @@
 						},
 						fail(error) {
 							uni.hideLoading();
-							this.$refs.uToast.show({
+							app.$refs.uToast.show({
 								title: '发布失败,请稍后重试！',
 								type: 'error',
 								position: 'top'
@@ -411,6 +423,36 @@
 				var oDate2 = new Date(date2);
 				if (oDate1.getTime() > oDate2.getTime()) {
 					return false;
+				}
+			},
+			clearData() {
+				this.obj = {
+					activityTitle: "",
+					voteIntroduce: "",
+					voteItemlist: [{
+							index: 1,
+							content: ""
+						},
+						{
+							index: 2,
+							content: ""
+						}
+					],
+					startTime: moment().format('YYYY-MM-DD HH:mm'),
+					endTime: moment().add({
+						y: 0,
+						M: 0,
+						d: 1,
+						h: 0,
+						m: 0
+					}).format('YYYY-MM-DD HH:mm'),
+					voteMoreTxt: "总共1次",
+					voteMore: "1",
+					switchVal: true,
+					status: 1,
+					openid: "",
+					voteType: "textVote",
+					creatUserInfo: ""
 				}
 			}
 

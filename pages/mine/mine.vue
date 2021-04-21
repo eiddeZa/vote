@@ -11,18 +11,17 @@
 				</view>
 				<!-- <u-gap height="30" bg-color="#fff"></u-gap> -->
 				<u-grid :col="3" :border="false">
-					<u-grid-item>
-						<u-badge count="9" :offset="[20, 20]"></u-badge>
+					<u-grid-item @click="goMineIssue({status:1})">
 						<u-icon name="photo" :size="46"></u-icon>
-						<view class="grid-text">参与的活动</view>
-					</u-grid-item>
-					<u-grid-item>
-						<u-icon name="lock" :size="46"></u-icon>
 						<view class="grid-text">发起的活动</view>
 					</u-grid-item>
-					<u-grid-item>
+					<u-grid-item @click="goMineIssue({status:2})">
+						<u-icon name="clock-fill" :size="46"></u-icon>
+						<view class="grid-text">进行中的活动</view>
+					</u-grid-item>
+					<u-grid-item @click="goMineIssue({status:3})">
 						<u-icon name="hourglass" :size="46"></u-icon>
-						<view class="grid-text">报名的活动</view>
+						<view class="grid-text">结束的活动</view>
 					</u-grid-item>
 				</u-grid>
 			</view>
@@ -75,6 +74,13 @@ export default {
 					animationDuration: 200
 				});
 			}
+		},
+		goMineIssue(name){
+			// status 状态 1:创建完成(不是所有投票都是创建后，直接开始的，也可能是以后的时间)2:进行中的投票3:已结束的投票
+			uni.navigateTo({
+				url: "../mineIssue/mineIssue?Date=" +
+					encodeURIComponent(JSON.stringify(name)),
+			});
 		}
 	}
 };

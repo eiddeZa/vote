@@ -18,7 +18,7 @@
 					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>1999人参与已投票, 199999
 				</view>
 				<view class="activityEndTime">
-					<u-icon class="iconz" color="#f16131" name="clock-fill" size="28"></u-icon>{{item.endTime}}
+					<u-icon class="iconz" color="#f16131" name="clock-fill" size="28"></u-icon>{{item.endTime}} 结束
 				</view>
 			</view>
 		</view>
@@ -77,9 +77,8 @@
 			getList() {
 				let that = this;
 				uniCloud.callFunction({
-					name: "get_ImageTextVote",
+					name: "get_hotlist",
 					data: {
-						openid: "0910",
 						paging: {
 							page: that.page,
 							limit: 5,
