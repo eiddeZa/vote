@@ -221,25 +221,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -277,6 +258,33 @@ var _default =
         name: 'getDetail',
         data: {
           _id: that.banner._id },
+
+        success: function success(res) {
+          uni.hideLoading();
+          console.log(res);
+          if (res.result.data) {
+            that.data = res.result.data[0];
+            that.src = that.data.creatUserInfo.avatarUrl;
+            that.creatName = that.data.creatUserInfo.nickName;
+            that.updateView();
+          }
+        },
+        fail: function fail(error) {
+          uni.hideLoading();
+          that.$operate.toast({
+            title: '网络请求错误！' });
+
+        } });
+
+    },
+    updateView: function updateView() {
+      var that = this;
+      uniCloud.callFunction({
+        name: 'updatePageView',
+        data: {
+          name: "hot_list",
+          _id: that.banner._id,
+          pageview: that.data.pageview + 1 },
 
         success: function success(res) {
           uni.hideLoading();

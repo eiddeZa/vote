@@ -6,7 +6,7 @@
 			<image src="/static/image/hot.png" mode=""></image>
 			<text>热门活动</text>
 		</view>
-		<view v-for="(item, index) in activityList" :key="index" class="activityList"  @click="goDetail(item)">
+		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
 			<view class="activityImage">
 				<image :src="item.voteItemlist[0].imgList[0]" mode=""></image>
 			</view>
@@ -15,7 +15,8 @@
 					<u-icon class="iconz" color="#f16131" name="grid-fill" size="28"></u-icon>{{item.activityTitle}}
 				</view>
 				<view class="activityNum">
-					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>1999人参与已投票, 199999
+					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>{{item.pageview}}人参与,
+					已投票{{item.voteItemlist | total}}
 				</view>
 				<view class="activityEndTime">
 					<u-icon class="iconz" color="#f16131" name="clock-fill" size="28"></u-icon>{{item.endTime}} 结束
@@ -73,6 +74,15 @@
 			this.status = "loading";
 			this.getList();
 		},
+		filters: {
+			total(data) {
+				let num=0;
+				for(let i=0;i<data.length;i++){
+					num=num+data[i].vote;
+				}
+				return num;
+			}
+		},
 		methods: {
 			getList() {
 				let that = this;
@@ -101,14 +111,16 @@
 						}
 					},
 					fail(error) {
-						that.$operate.toast({title:"网络请求错误！"})
+						that.$operate.toast({
+							title: "网络请求错误！"
+						})
 						console.log(error);
 					},
 				});
 			},
 			goDetail(item) {
 				let detail = {
-					title:item.activityTitle,
+					title: item.activityTitle,
 					_id: item._id
 				};
 				console.log(detail);

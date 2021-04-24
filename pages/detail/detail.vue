@@ -12,10 +12,10 @@
 				<view class="tp_status">
 					<u-tag text="投票中" type="warning" mode="light" size="mini" />
 				</view>
-				<view class="enddate">{{this.data.endTime}}结束</view>
+				<view class="enddate">{{data.endTime}}结束</view>
 			</view>
 		</view>
-		<view class="tit">{{this.data.activityTitle}}</view>
+		<view class="tit">{{data.activityTitle}}</view>
 
 		<view class="hd_rule">
 			<view class="">
@@ -23,15 +23,15 @@
 			</view>
 			<view class="item_rule">
 				<view class="startTit">开始时间</view>
-				<view class="">{{this.data.startTime}}</view>
+				<view class="">{{data.startTime}}</view>
 			</view>
 			<view class="item_rule">
 				<view class="startTit">结束时间</view>
-				<view class="">{{this.data.endTime}}</view>
+				<view class="">{{data.endTime}}</view>
 			</view>
 			<view class="item_rule">
 				<view class="startTit">投票规则</view>
-				<view class="">每人{{this.data.voteMoreTxt}}</view>
+				<view class="">每人{{data.voteMoreTxt}}</view>
 			</view>
 		</view>
 
@@ -40,11 +40,11 @@
 				<u-tag text="投票详情" type="warning" mode="dark" />
 			</view>
 			<view class="item_rule">
-				<view>{{this.data.voteIntroduce}}</view>
+				<view>{{data.voteIntroduce}}</view>
 			</view>
 		</view>
 
-		<view class="hdOption" v-for="item,index in this.data.voteItemlist">
+		<view class="hdOption" v-for="item,index in data.voteItemlist" :key="index">
 			<view class="imgOption">
 				<image @click="selectImage(item.imgList)" :src="item.imgList[0]"
 					style="width:110rpx;height:110rpx;overflow:hidden;border-radius: 10rpx;"></image>
@@ -57,25 +57,6 @@
 		<view class="content_1">
 			<u-button shape="circle" class="custom-style" @click="submitData" :ripple="true">投票</u-button>
 		</view>
-
-		<!-- <view class="cu-form-group">
-		  <view
-		    class="bg-img"
-		  >
-		    <image
-		      :src="activeImage"
-		      style="width: 100%; height: 100%"
-		      mode="aspectFill"
-		    >
-		    </image>
-		    <view
-		      class="cu-tag bg-red"
-		    >
-		      <text class="cuIcon-close"></text>
-		 </view> 
-		 </view>
-		 </view> -->
-
 	</view>
 </template>
 
@@ -124,6 +105,7 @@
 							that.data = res.result.data[0];
 							that.src = that.data.creatUserInfo.avatarUrl;
 							that.creatName = that.data.creatUserInfo.nickName;
+							that.updateView();
 						}
 					},
 					fail(error) {
@@ -134,6 +116,32 @@
 					}
 				});
 			},
+			updateView(){
+				let that = this;
+				uniCloud.callFunction({
+					name: 'updatePageView',
+					data: {
+						name:"hot_list",
+						_id: that.banner._id,
+						pageview:that.data.pageview+1
+					},
+					success(res) {
+						uni.hideLoading();
+						console.log(res);
+						if (res.result.data) {
+							that.data = res.result.data[0];
+							that.src = that.data.creatUserInfo.avatarUrl;
+							that.creatName = that.data.creatUserInfo.nickName;
+						}
+					},
+					fail(error) {
+						uni.hideLoading();
+						that.$operate.toast({
+							title: '网络请求错误！'
+						});
+					}
+					});
+				},
 			selectItme(index) {
 				this.activeItem = index;
 				console.log(index);

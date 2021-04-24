@@ -462,14 +462,17 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
 
 
       obj: {
+        pageview: 0,
         activityTitle: "",
         voteIntroduce: "",
         voteItemlist: [{
           index: 1,
+          vote: 0, //票数
           content: "",
           imgList: [] },
 
         {
+          vote: 0,
           index: 2,
           content: "",
           imgList: [] }],
@@ -483,7 +486,7 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
         status: 1,
         openid: "",
         creatUserInfo: "",
-        voteType: "textVote" } };
+        voteType: "ImageTextVote" } };
 
 
   },
@@ -492,6 +495,7 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
     addItem: function addItem() {
       this.obj.voteItemlist.push({
         index: this.obj.voteItemlist.length + 1,
+        vote: 0,
         content: "",
         imgList: [] });
 

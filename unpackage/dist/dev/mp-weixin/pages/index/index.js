@@ -132,6 +132,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.activityList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f0 = _vm._f("total")(item.voteItemlist)
+
+    return {
+      $orig: $orig,
+      f0: f0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -166,6 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uniCloud, uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
 //
 //
 //
@@ -240,6 +260,15 @@ var _default =
     this.status = "loading";
     this.getList();
   },
+  filters: {
+    total: function total(data) {
+      var num = 0;
+      for (var i = 0; i < data.length; i++) {
+        num = num + data[i].vote;
+      }
+      return num;
+    } },
+
   methods: {
     getList: function getList() {
       var that = this;
@@ -268,7 +297,9 @@ var _default =
           }
         },
         fail: function fail(error) {
-          that.$operate.toast({ title: "网络请求错误！" });
+          that.$operate.toast({
+            title: "网络请求错误！" });
+
           console.log(error);
         } });
 
