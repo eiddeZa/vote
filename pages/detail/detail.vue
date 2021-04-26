@@ -49,7 +49,7 @@
 				<image @click="selectImage(item.imgList)" :src="item.imgList[0]"
 					style="width:110rpx;height:110rpx;overflow:hidden;border-radius: 10rpx;"></image>
 			</view>
-			<view :class="activeItem==index?'hdOptionBtn active-bgc':'hdOptionBtn'" @click="selectItme(index)">
+			<view :class="activeItem==index?'hdOptionBtn active-bgc':'hdOptionBtn'" @click="selectItme(index,item)">
 				<text>{{item.content}}</text></view>
 		</view>
 
@@ -68,7 +68,8 @@
 				src: "",
 				creatName: "",
 				data: "",
-				activeItem: "*"
+				activeItem: "*",
+				activeobj:{}
 			};
 		},
 		onLoad(event) {
@@ -126,7 +127,6 @@
 						pageview:that.data.pageview+1
 					},
 					success(res) {
-						uni.hideLoading();
 						console.log(res);
 						if (res.result.data) {
 							that.data = res.result.data[0];
@@ -135,16 +135,16 @@
 						}
 					},
 					fail(error) {
-						uni.hideLoading();
 						that.$operate.toast({
 							title: '网络请求错误！'
 						});
 					}
 					});
 				},
-			selectItme(index) {
+			selectItme(index,item) {
 				this.activeItem = index;
-				console.log(index);
+				this.activeobj=item;
+				console.log(index,item);
 			},
 			selectImage(url) {
 				uni.previewImage({
@@ -153,7 +153,40 @@
 				});
 			},
 			submitData() {
-				console.log(this.data)
+				if(JSON.stringify(this.activeobj) != "{}"){
+					let that = this;
+					uni.showLoading({
+						title: '提交中...',
+						mask: true
+					});
+					uniCloud.callFunction({
+						name: 'update_vote',
+						data: {
+							name:"hot_list",
+							_id: that.banner._id,
+							pageview:that.data.pageview+1
+						},
+						success(res) {
+							uni.hideLoading();
+							console.log(res);
+							if (res.result.data) {
+								that.data = res.result.data[0];
+								that.src = that.data.creatUserInfo.avatarUrl;
+								that.creatName = that.data.creatUserInfo.nickName;
+							}
+						},
+						fail(error) {
+							uni.hideLoading();
+							that.$operate.toast({
+								title: '网络请求错误！'
+							});
+						}
+						});
+				}else{
+					this.$operate.toast({
+						title: '请选择投票项！'
+					});
+				}
 			}
 		}
 	};

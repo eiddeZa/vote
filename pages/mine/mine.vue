@@ -5,8 +5,9 @@
 				<view class="userInfo_box" @click="handleLogin">
 					<u-avatar :src="src" mode="square" size="large" class="userAvatar"></u-avatar>
 					<view class="user_info">
-						<view class="userName"  @click="handleLogin">{{userName}}</view>
-						<u-button class="syncBtn" :ripple="true" size="mini" shape="circle">同步微信资料</u-button>
+						<view class="userName" @click="handleLogin">{{userName}}</view>
+						<u-button class="syncBtn" :ripple="true" size="mini" shape="circle" @click="syncZL">同步微信资料
+						</u-button>
 					</view>
 				</view>
 				<!-- <u-gap height="30" bg-color="#fff"></u-gap> -->
@@ -47,95 +48,119 @@
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			tabs: '',
-			src: '',
-			userName:"请登录",
-			user:''
-		};
-	},
-	onLoad() {
-		this.tabs = this.$store.state.tabbarList;
-		this.user = uni.getStorageSync('userInfo');
-			console.log(this.user );
-		if (this.user) {
-			this.src=this.user.avatarUrl;
-			this.userName=this.user.nickName;
-		}
-	},
-	methods: {
-		handleLogin() {
-			if(this.user=="" || this.user==null){
-				uni.redirectTo({
-					url: '../login/login',
-					animationType: 'pop-in',
-					animationDuration: 200
-				});
+	export default {
+		data() {
+			return {
+				tabs: '',
+				src: '',
+				userName: "请登录",
+				user: ''
+			};
+		},
+		onLoad() {
+			this.tabs = this.$store.state.tabbarList;
+			this.user = uni.getStorageSync('userInfo');
+			console.log(this.user);
+			if (this.user) {
+				this.src = this.user.avatarUrl;
+				this.userName = this.user.nickName;
 			}
 		},
-		goMineIssue(name){
-			// status 状态 1:创建完成(不是所有投票都是创建后，直接开始的，也可能是以后的时间)2:进行中的投票3:已结束的投票
-			uni.navigateTo({
-				url: "../mineIssue/mineIssue?Date=" +
-					encodeURIComponent(JSON.stringify(name)),
-			});
+		methods: {
+			handleLogin() {
+				if (this.user == "" || this.user == null) {
+					uni.redirectTo({
+						url: '../login/login',
+						animationType: 'pop-in',
+						animationDuration: 200
+					});
+				}
+			},
+			goMineIssue(name) {
+				// status 状态 1:创建完成(不是所有投票都是创建后，直接开始的，也可能是以后的时间)2:进行中的投票3:已结束的投票
+				uni.navigateTo({
+					url: "../mineIssue/mineIssue?Date=" +
+						encodeURIComponent(JSON.stringify(name)),
+				});
+			},
+			syncZL() {
+				if (this.user != "" && this.user != null) {
+					uni.showToast({
+						title: "同步成功",
+						duration: 2000,
+						icon: 'none'
+					});
+				} else {
+					uni.showToast({
+						title: "请先登录",
+						duration: 2000,
+						icon: 'none'
+					});
+				}
+			}
 		}
-	}
-};
+	};
 </script>
 
 <style lang="scss">
-.mine_box {
-	height: 100%;
-	background: #efeff0;
-}
-.mine_bgc {
-	height: 330rpx;
-	background: #f16131;
-	padding: 30rpx;
-	margin-bottom: 120rpx;
-	.mine_info {
-		border-radius: 10rpx;
-		height: 390rpx;
-		background: #ffffff;
-		.userInfo_box {
-			padding: 30rpx 60rpx;
+	.mine_box {
+		height: 100%;
+		background: #efeff0;
+	}
+
+	.mine_bgc {
+		height: 330rpx;
+		background: #f16131;
+		padding: 30rpx;
+		margin-bottom: 120rpx;
+
+		.mine_info {
+			border-radius: 10rpx;
+			height: 390rpx;
+			background: #ffffff;
+
+			.userInfo_box {
+				padding: 30rpx 60rpx;
+				overflow: hidden;
+			}
+
+			.userAvatar,
+			.user_info {
+				margin: 20rpx;
+				float: left;
+			}
+
+			.userName {
+				font-size: 50rpx;
+			}
+
+			.syncBtn {
+				margin-top: 20rpx;
+				color: #f16131;
+			}
+		}
+	}
+
+	.badge-icon {
+		position: absolute;
+		top: 14rpx;
+		right: 40rpx;
+		width: 30rpx;
+		height: 30rpx;
+	}
+
+	.grid-text {
+		font-size: 28rpx;
+		margin-top: 4rpx;
+		color: $u-type-info;
+	}
+
+	.cellListBox {
+		padding: 0 30rpx 30rpx;
+
+		.cellList {
+			border-radius: 10rpx !important;
 			overflow: hidden;
 		}
-		.userAvatar,
-		.user_info {
-			margin: 20rpx;
-			float: left;
-		}
-		.userName {
-			font-size: 50rpx;
-		}
-		.syncBtn {
-			margin-top: 20rpx;
-			color: #f16131;
-		}
 	}
-}
-.badge-icon {
-	position: absolute;
-	top: 14rpx;
-	right: 40rpx;
-	width: 30rpx;
-	height: 30rpx;
-}
-
-.grid-text {
-	font-size: 28rpx;
-	margin-top: 4rpx;
-	color: $u-type-info;
-}
-.cellListBox {
-	padding: 0 30rpx 30rpx;
-	.cellList {
-		border-radius: 10rpx !important;
-		overflow: hidden;
-	}
-}
 </style>
