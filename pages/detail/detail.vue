@@ -10,9 +10,12 @@
 			</view>
 			<view class="Info2">
 				<view class="tp_status">
-					<u-tag text="投票中" type="warning" mode="light" size="mini" />
+					<u-tag text="待开始" v-if="data.status==1" type="warning" mode="light" size="mini" />
+					<u-tag text="投票中" v-if="data.status==2" type="success" mode="light" size="mini" />
+					<u-tag text="已结束" v-if="data.status==3" type="info" mode="light" size="mini" />
 				</view>
-				<view class="enddate">{{data.endTime}}结束</view>
+				<view class="enddate" v-if="data.status!=1">{{data.endTime}} 结束</view>
+				<view class="enddate" v-else>{{data.startTime}} 开始</view>
 			</view>
 		</view>
 		<view class="tit">{{data.activityTitle}}</view>
@@ -45,7 +48,7 @@
 		</view>
 
 		<view class="hdOption" v-for="item,index in data.voteItemlist" :key="index">
-			<view class="imgOption">
+			<view class="imgOption" v-if="item.imgList">
 				<image @click="selectImage(item.imgList)" :src="item.imgList[0]"
 					style="width:110rpx;height:110rpx;overflow:hidden;border-radius: 10rpx;"></image>
 			</view>
@@ -69,7 +72,7 @@
 				creatName: "",
 				data: "",
 				activeItem: "*",
-				activeobj:{}
+				activeobj:{},
 			};
 		},
 		onLoad(event) {
@@ -94,10 +97,12 @@
 					mask: true
 				});
 				let that = this;
+				console.log(that.banner.type);
 				uniCloud.callFunction({
 					name: 'getDetail',
 					data: {
-						_id: that.banner._id
+						_id: that.banner._id,
+						type:that.banner.type,
 					},
 					success(res) {
 						uni.hideLoading();
@@ -122,7 +127,7 @@
 				uniCloud.callFunction({
 					name: 'updatePageView',
 					data: {
-						name:"hot_list",
+						name:that.banner.type,
 						_id: that.banner._id,
 						pageview:that.data.pageview+1
 					},
@@ -259,6 +264,7 @@
 		.imgOption {
 			width: 110rpx;
 			height: 110rpx;
+			margin-right: 40rpx;
 			flex-grow: 0;
 			felx-shrink: 0;
 		}
@@ -266,7 +272,6 @@
 		.hdOptionBtn {
 			border: 1px solid #dcdcdc;
 			padding: 36rpx;
-			margin-left: 40rpx;
 			width: 100%;
 			border-radius: 10rpx;
 		}

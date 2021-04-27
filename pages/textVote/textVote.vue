@@ -268,14 +268,17 @@
 					}
 				],
 				obj: {
+					pageview:0,
 					activityTitle: "",
 					voteIntroduce: "",
 					voteItemlist: [{
 							index: 1,
+							vote:0,	//票数
 							content: ""
 						},
 						{
 							index: 2,
+							vote:0,	//票数
 							content: ""
 						}
 					],
@@ -292,8 +295,9 @@
 					switchVal: true,
 					status: 1,
 					openid: "",
-					voteType: "textVote",
-					creatUserInfo: ""
+					creatUserInfo:"",
+					creatUserInfo: "",
+					voteType: "textVote"
 				},
 			}
 		},
@@ -302,6 +306,7 @@
 			addItem() {
 				this.obj.voteItemlist.push({
 					index: this.obj.voteItemlist.length + 1,
+					vote:0,
 					content: ""
 				});
 				console.log(this.obj.voteItemlist)
@@ -427,14 +432,17 @@
 			},
 			clearData() {
 				this.obj = {
+					pageview:0,
 					activityTitle: "",
 					voteIntroduce: "",
 					voteItemlist: [{
 							index: 1,
+							vote:0,	//票数
 							content: ""
 						},
 						{
 							index: 2,
+							vote:0,	//票数
 							content: ""
 						}
 					],
@@ -451,8 +459,9 @@
 					switchVal: true,
 					status: 1,
 					openid: "",
-					voteType: "textVote",
-					creatUserInfo: ""
+					creatUserInfo:"",
+					creatUserInfo: "",
+					voteType: "textVote"
 				}
 			}
 

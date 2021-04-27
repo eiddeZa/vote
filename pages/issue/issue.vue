@@ -172,7 +172,7 @@
 
 	.uToast {
 		/deep/.u-text {
-			min-width: 300rpx;
+			min-width: 320rpx;
 		}
 	}
 </style>

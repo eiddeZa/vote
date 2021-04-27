@@ -4,17 +4,17 @@ exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ', event)
 	let res ;
-	if (event.name == "hot_list" && event._id) {
+	if (event.name == "hotList" && event._id) {
 		const collection = db.collection('hot_list');
 		res = await collection.doc(event._id).update({
 			pageview: event.pageview
 		})
-	} else if (event.name == "imageTextVote_list" && event._id) {
+	} else if (event.name == "ImageTextVote" && event._id) {
 		const collection = db.collection('imageTextVote_list');
 		res = await collection.doc(event._id).update({
 			pageview: event.pageview
 		})
-	} else if (event.name == "vote_list" && event._id) {
+	} else if (event.name == "textVote" && event._id) {
 		const collection = db.collection('vote_list');
 		res = await collection.doc(event._id).update({
 			pageview: event.pageview

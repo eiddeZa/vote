@@ -531,7 +531,7 @@
 					status:1,
 					openid: "",
 					creatUserInfo:"",
-					voteType: "textVote",
+					voteType: "ImageTextVote",
 				}
 			}
 		},

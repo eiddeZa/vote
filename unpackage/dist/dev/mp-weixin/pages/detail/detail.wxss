@@ -91,6 +91,7 @@ page {
 .hdOption .imgOption {
   width: 110rpx;
   height: 110rpx;
+  margin-right: 40rpx;
   -webkit-box-flex: 0;
   -webkit-flex-grow: 0;
           flex-grow: 0;
@@ -99,7 +100,6 @@ page {
 .hdOption .hdOptionBtn {
   border: 1px solid #dcdcdc;
   padding: 36rpx;
-  margin-left: 40rpx;
   width: 100%;
   -webkit-border-radius: 10rpx;
           border-radius: 10rpx;

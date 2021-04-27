@@ -104,6 +104,6 @@ page {
   background-image: linear-gradient(135deg, #43CBFF 10%, #9708CC 100%);
 }
 .uToast .u-text {
-  min-width: 300rpx;
+  min-width: 320rpx;
 }
 

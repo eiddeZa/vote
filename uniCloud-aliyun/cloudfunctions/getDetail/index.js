@@ -1,12 +1,24 @@
 'use strict';
 const db = uniCloud.database();
-const votelist = db.collection('hot_list');
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ', event)
+	
 	let res;
-	if (event._id) {
-		res = await votelist.where({
+	
+	if (event.type == "hotList" && event._id) {
+		const collection = db.collection('hot_list');
+		res = await collection.where({
+			_id: event._id
+		}).get();
+	} else if (event.type == "ImageTextVote" && event._id) {
+		const collection = db.collection('imageTextVote_list');
+		res = await collection.where({
+			_id: event._id
+		}).get();
+	} else if (event.type == "textVote" && event._id) {
+		const collection = db.collection('vote_list');
+		res = await collection.where({
 			_id: event._id
 		}).get();
 	} else {

@@ -15,7 +15,7 @@
 					<u-icon class="iconz" color="#f16131" name="grid-fill" size="28"></u-icon>{{item.activityTitle}}
 				</view>
 				<view class="activityNum">
-					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>{{item.pageview}}人参与,
+					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>浏览{{item.pageview}}次,
 					已投票{{item.voteItemlist | total}}
 				</view>
 				<view class="activityEndTime">
@@ -121,7 +121,8 @@
 			goDetail(item) {
 				let detail = {
 					title: item.activityTitle,
-					_id: item._id
+					_id: item._id,
+					type:"hotList"
 				};
 				console.log(detail);
 				uni.navigateTo({

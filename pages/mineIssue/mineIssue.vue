@@ -14,7 +14,7 @@
 					<u-icon class="iconz" color="#f16131" name="grid-fill" size="28"></u-icon>{{item.activityTitle}}
 				</view>
 				<view class="activityNum">
-					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>1999人参与已投票, 199999
+					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>浏览{{item.pageview}}次,已投票 {{item.voteItemlist | total}}
 				</view>
 				<view class="activityEndTime">
 					<u-icon class="iconz" color="#f16131" name="clock-fill" size="28"></u-icon>{{item.endTime}} 结束
@@ -22,6 +22,12 @@
 			</view>
 		</view>
 		<u-loadmore :status="status" :icon-type="iconType" :load-text="loadText" />
+		
+		系统主要分为两大块客户端和服务端；
+		小程序的客户端的主体框架采用uniAPP+unview进行编写的、
+		服务端采用的是 DCloud 联合阿里云、腾讯云，为开发者提供的基于 serverless 模式和 js 编程的云开发平台uniCloud。
+		数据库采用可视化的MySQL。
+		
 	</view>
 </template>
 
@@ -68,6 +74,15 @@
 			this.status = "loading";
 			this.getList();
 		},
+		filters: {
+			total(data) {
+				let num=0;
+				for(let i=0;i<data.length;i++){
+					num=num+data[i].vote;
+				}
+				return num;
+			}
+		},
 		methods: {
 			// tabs通知swiper切换
 			tabsChange(index) {
@@ -99,6 +114,7 @@
 						},
 					},
 					success(res) {
+						console.log(res);
 						uni.hideLoading();
 						if (res.result.data) {
 							for (let i = 0; i < res.result.data.length; i++) {
@@ -119,6 +135,18 @@
 					}
 				});
 			},
+			goDetail(item){
+				let detail = {
+					title: item.activityTitle,
+					_id: item._id,
+					type:item.voteType
+				};
+				console.log(detail);
+				uni.navigateTo({
+					url: "../detail/detail?detailDate=" +
+						encodeURIComponent(JSON.stringify(detail)),
+				});	
+			}
 		}
 	}
 </script>
