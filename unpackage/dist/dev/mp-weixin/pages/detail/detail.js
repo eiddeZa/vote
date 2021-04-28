@@ -219,20 +219,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
     return {
-      banner: "",
-      src: "",
-      creatName: "",
-      data: "",
-      activeItem: "*",
+      banner: '',
+      src: '',
+      creatName: '',
+      data: '',
+      activeItem: '*',
       activeobj: {} };
 
   },
@@ -289,8 +284,7 @@ var _default =
         name: 'updatePageView',
         data: {
           name: that.banner.type,
-          _id: that.banner._id,
-          pageview: that.data.pageview + 1 },
+          _id: that.banner._id },
 
         success: function success(res) {
           console.log(res);
@@ -319,29 +313,43 @@ var _default =
 
     },
     submitData: function submitData() {
-      if (JSON.stringify(this.activeobj) != "{}") {
+      if (JSON.stringify(this.activeobj) != '{}') {
         var that = this;
         uni.showLoading({
           title: '提交中...',
           mask: true });
 
+        console.log({
+          name: that.banner.type,
+          _id: that.banner._id,
+          userInfo: uni.getStorageSync('userInfo') });
+
         uniCloud.callFunction({
           name: 'update_vote',
           data: {
-            name: "hot_list",
+            name: that.banner.type,
             _id: that.banner._id,
-            pageview: that.data.pageview + 1 },
+            voteData: this.activeobj,
+            userInfo: uni.getStorageSync('userInfo') },
 
           success: function success(res) {
             uni.hideLoading();
             console.log(res);
-            if (res.result.data) {
-              that.data = res.result.data[0];
-              that.src = that.data.creatUserInfo.avatarUrl;
-              that.creatName = that.data.creatUserInfo.nickName;
+            if (res.result.updated) {
+              that.activeItem = '*';
+              that.activeobj = {};
+              uni.showToast({
+                title: "投票成功",
+                duration: 2000 });
+
+            } else {
+              that.$operate.toast({
+                title: res.result.msg });
+
             }
           },
           fail: function fail(error) {
+            console.log(error);
             uni.hideLoading();
             that.$operate.toast({
               title: '网络请求错误！' });

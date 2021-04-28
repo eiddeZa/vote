@@ -468,12 +468,14 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
         voteItemlist: [{
           index: 1,
           vote: 0, //票数
+          updateInfo: [], //更新用户信息
           content: "",
           imgList: [] },
 
         {
           vote: 0,
           index: 2,
+          updateInfo: [], //更新用户信息
           content: "",
           imgList: [] }],
 
@@ -494,8 +496,9 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
   methods: {
     addItem: function addItem() {
       this.obj.voteItemlist.push({
-        index: this.obj.voteItemlist.length + 1,
         vote: 0,
+        index: this.obj.voteItemlist.length + 1,
+        updateInfo: [],
         content: "",
         imgList: [] });
 
@@ -612,8 +615,9 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
         content: "是否要删除这张图片",
         success: function success(res) {
           if (res.confirm) {
+            //event.currentTarget.dataset.index
             _this2.obj.voteItemlist[index].imgList.splice(
-            event.currentTarget.dataset.index,
+            0,
             1);
 
           }
@@ -693,11 +697,15 @@ var moment = __webpack_require__(/*! moment */ 86);var _default =
         voteIntroduce: "",
         voteItemlist: [{
           index: 1,
+          vote: 0, //票数
+          updateInfo: [], //更新用户信息
           content: "",
           imgList: [] },
 
         {
-          index: 2,
+          index: 1,
+          vote: 0, //票数
+          updateInfo: [], //更新用户信息
           content: "",
           imgList: [] }],
 

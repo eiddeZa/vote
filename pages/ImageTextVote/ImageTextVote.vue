@@ -289,12 +289,14 @@
 					voteItemlist: [{
 							index: 1,
 							vote:0,	//票数
+							updateInfo:[],//更新用户信息
 							content: "",
 							imgList: [],
 						},
 						{	
 							vote:0,
 							index: 2,
+							updateInfo:[],//更新用户信息
 							content: "",
 							imgList: [],
 						},
@@ -315,8 +317,9 @@
 		methods: {
 			addItem() {
 				this.obj.voteItemlist.push({
-					index: this.obj.voteItemlist.length + 1,
 					vote:0,
+					index: this.obj.voteItemlist.length + 1,
+					updateInfo:[],
 					content: "",
 					imgList: [],
 				});
@@ -433,8 +436,9 @@
 					content: "是否要删除这张图片",
 					success: (res) => {
 						if (res.confirm) {
+							//event.currentTarget.dataset.index
 							this.obj.voteItemlist[index].imgList.splice(
-								event.currentTarget.dataset.index,
+								0,
 								1
 							);
 						}
@@ -514,11 +518,15 @@
 					voteIntroduce: "",
 					voteItemlist: [{
 							index: 1,
+							vote:0,	//票数
+							updateInfo:[],//更新用户信息
 							content: "",
 							imgList: [],
 						},
 						{
-							index: 2,
+							index: 1,
+							vote:0,	//票数
+							updateInfo:[],//更新用户信息
 							content: "",
 							imgList: [],
 						},

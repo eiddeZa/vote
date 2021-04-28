@@ -348,6 +348,10 @@
 				if (this.formVerify()) {
 					this.obj.creatUserInfo = uni.getStorageSync('userInfo');
 					this.obj.openid = uni.getStorageSync('userInfo').openid;
+					//判断开始时间是否小于结束时间 小于只改为进行中状态2
+					 if(this.compare(this.obj.startTime, moment().format('YYYY-MM-DD HH:mm'))==true){
+						this.obj.status=2;
+					}
 					let app=this;
 					uniCloud.callFunction({
 						name: "add_votelist",
@@ -427,7 +431,9 @@
 				var oDate1 = new Date(date1);
 				var oDate2 = new Date(date2);
 				if (oDate1.getTime() > oDate2.getTime()) {
-					return false;
+					return false;	//1d
+				}else{
+					return true; //2d
 				}
 			},
 			clearData() {

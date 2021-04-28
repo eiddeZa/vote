@@ -22,12 +22,6 @@
 			</view>
 		</view>
 		<u-loadmore :status="status" :icon-type="iconType" :load-text="loadText" />
-		
-		系统主要分为两大块客户端和服务端；
-		小程序的客户端的主体框架采用uniAPP+unview进行编写的、
-		服务端采用的是 DCloud 联合阿里云、腾讯云，为开发者提供的基于 serverless 模式和 js 编程的云开发平台uniCloud。
-		数据库采用可视化的MySQL。
-		
 	</view>
 </template>
 
