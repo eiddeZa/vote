@@ -1,6 +1,6 @@
 'use strict';
 const db = uniCloud.database();
-const collection = db.collection('vote_list');
+const collection = db.collection('textVote_list');
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ', event)

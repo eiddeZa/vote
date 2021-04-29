@@ -53,8 +53,7 @@
   cursor: pointer;
   padding: 0 40rpx;
   z-index: 1;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transition: all 0.15s;
   transition: all 0.15s;
 }
@@ -135,8 +134,7 @@
   content: ' ';
   position: absolute;
   pointer-events: none;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   left: 0;
@@ -151,8 +149,7 @@
 .u-wave-ripple.data-v-3bf2dba7 {
   z-index: 0;
   position: absolute;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  border-radius: 100%;
   background-clip: padding-box;
   pointer-events: none;
   -webkit-user-select: none;
@@ -173,12 +170,10 @@
   transition: opacity 1s linear, transform 0.4s linear, -webkit-transform 0.4s linear;
 }
 .u-round-circle.data-v-3bf2dba7 {
-  -webkit-border-radius: 100rpx;
-          border-radius: 100rpx;
+  border-radius: 100rpx;
 }
 .u-round-circle.data-v-3bf2dba7::after {
-  -webkit-border-radius: 100rpx;
-          border-radius: 100rpx;
+  border-radius: 100rpx;
 }
 .u-loading.data-v-3bf2dba7::after {
   background-color: rgba(255, 255, 255, 0.35);

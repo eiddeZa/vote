@@ -30,13 +30,12 @@
 }
 .mine_bgc {
   height: 330rpx;
-  background: #f16131;
+  background: #DCDCDC;
   padding: 30rpx;
   margin-bottom: 120rpx;
 }
 .mine_bgc .mine_info {
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
   height: 390rpx;
   background: #ffffff;
 }
@@ -72,8 +71,19 @@
   padding: 0 30rpx 30rpx;
 }
 .cellListBox .cellList {
-  -webkit-border-radius: 10rpx !important;
-          border-radius: 10rpx !important;
+  border-radius: 10rpx !important;
   overflow: hidden;
+}
+.service {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  font-size: 28rpx;
+  color: #606266;
+  text-align: left;
+  padding: 0;
+}
+ .service:after {
+  border: none;
 }
 

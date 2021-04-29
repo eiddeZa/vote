@@ -69,7 +69,25 @@
                 "enablePullDownRefresh": false
             }
             
+        } ,{
+            "path" : "pages/videoTextVote/videoTextVote",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "视频投票",
+                "enablePullDownRefresh": false
+            }
+            
         }
+        ,{
+            "path" : "pages/wxgzh/wxgzh",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+       
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

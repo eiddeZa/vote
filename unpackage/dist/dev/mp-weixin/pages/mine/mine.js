@@ -96,28 +96,28 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-avatar/u-avatar */ "node-modules/uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! uview-ui/components/u-avatar/u-avatar.vue */ 292))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-avatar/u-avatar */ "node-modules/uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! uview-ui/components/u-avatar/u-avatar.vue */ 298))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 299))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 305))
     },
     uGrid: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-grid/u-grid */ "node-modules/uview-ui/components/u-grid/u-grid").then(__webpack_require__.bind(null, /*! uview-ui/components/u-grid/u-grid.vue */ 306))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-grid/u-grid */ "node-modules/uview-ui/components/u-grid/u-grid").then(__webpack_require__.bind(null, /*! uview-ui/components/u-grid/u-grid.vue */ 312))
     },
     uGridItem: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-grid-item/u-grid-item */ "node-modules/uview-ui/components/u-grid-item/u-grid-item").then(__webpack_require__.bind(null, /*! uview-ui/components/u-grid-item/u-grid-item.vue */ 313))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-grid-item/u-grid-item */ "node-modules/uview-ui/components/u-grid-item/u-grid-item").then(__webpack_require__.bind(null, /*! uview-ui/components/u-grid-item/u-grid-item.vue */ 319))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 257))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 263))
     },
     uCellGroup: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-cell-group/u-cell-group */ "node-modules/uview-ui/components/u-cell-group/u-cell-group").then(__webpack_require__.bind(null, /*! uview-ui/components/u-cell-group/u-cell-group.vue */ 320))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-cell-group/u-cell-group */ "node-modules/uview-ui/components/u-cell-group/u-cell-group").then(__webpack_require__.bind(null, /*! uview-ui/components/u-cell-group/u-cell-group.vue */ 326))
     },
     uCellItem: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-cell-item/u-cell-item */ "node-modules/uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! uview-ui/components/u-cell-item/u-cell-item.vue */ 327))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-cell-item/u-cell-item */ "node-modules/uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! uview-ui/components/u-cell-item/u-cell-item.vue */ 333))
     },
     uTabbar: function() {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabbar/u-tabbar.vue */ 278))
+      return Promise.all(/*! import() | node-modules/uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-tabbar/u-tabbar.vue */ 284))
     }
   }
 } catch (e) {
@@ -222,14 +222,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 var _default =
 {
   data: function data() {
     return {
       tabs: '',
       src: '',
-      userName: "请登录",
+      userName: '请登录',
       user: '' };
 
   },
@@ -244,7 +243,7 @@ var _default =
   },
   methods: {
     handleLogin: function handleLogin() {
-      if (this.user == "" || this.user == null) {
+      if (this.user == '' || this.user == null) {
         uni.redirectTo({
           url: '../login/login',
           animationType: 'pop-in',
@@ -255,24 +254,36 @@ var _default =
     goMineIssue: function goMineIssue(name) {
       // status 状态 1:创建完成(不是所有投票都是创建后，直接开始的，也可能是以后的时间)2:进行中的投票3:已结束的投票
       uni.navigateTo({
-        url: "../mineIssue/mineIssue?Date=" +
-        encodeURIComponent(JSON.stringify(name)) });
+        url: '../mineIssue/mineIssue?Date=' + encodeURIComponent(JSON.stringify(name)) });
 
     },
     syncZL: function syncZL() {
-      if (this.user != "" && this.user != null) {
+      if (this.user != '' && this.user != null) {
         uni.showToast({
-          title: "同步成功",
+          title: '同步成功',
           duration: 2000,
           icon: 'none' });
 
       } else {
         uni.showToast({
-          title: "请先登录",
+          title: '请先登录',
           duration: 2000,
           icon: 'none' });
 
       }
+    },
+    //免责声明
+    Disclaimer: function Disclaimer() {
+      uni.showModal({
+        title: '温馨提示',
+        content: "\u6211\u4EEC\u4EC5\u63D0\u4F9B\u53D1\u8D77\u53CA\u53C2\u4E0E\u6295\u7968\u7684\u5E73\u53F0\uFF0C\u4E0D\u5BF9\u7B2C\u4E09\u65B9\u53D1\u8D77\u4EBA\u884C\u4E3A\u627F\u62C5\u8D44\u4EFB\uFF0C\u6240\u6709\u6295\u7968\u5956\u54C1\u5747\u4E3A\u53D1\u8D77\u8005\u63D0\u4F9B\u5E76\u53D1\u653E\u3002\u672C\u5E73\u53F0\u4F1A\u5728\u6CD5\u5F8B\u8303\u56F4\u5185\u5C3D\u53EF\u80FD\u7684\u89C4\u8303\u548C\u7763\u4FC3\u7528\u6237\u9075\u5B88\u76F8\u5173\u6CD5\u5F8B\uFF0C\u8425\u9020\u826F\u597D\u7684\u6295\u7968\u5E73\u53F0\u7ED9\u7528\u6237\u3002",
+        showCancel: false,
+        success: function success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定');
+          }
+        } });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

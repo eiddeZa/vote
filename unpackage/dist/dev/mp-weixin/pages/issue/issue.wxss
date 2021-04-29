@@ -33,8 +33,7 @@ page {
   background-image: linear-gradient(135deg, #F6416C 30%, #FFF6B7 100%);
   color: #FFFFFF;
   padding: 30rpx;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -84,8 +83,7 @@ page {
   padding: 20rpx;
   margin-right: 20rpx;
   color: #fff;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
 }
 .wrap .demo-layout image {
   width: 70rpx;

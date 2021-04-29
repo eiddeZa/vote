@@ -17,7 +17,7 @@ exports.main = async (event, context) => {
 			_id: event._id
 		}).get();
 	} else if (event.type == "textVote" && event._id) {
-		const collection = db.collection('vote_list');
+		const collection = db.collection('textVote_list');
 		res = await collection.where({
 			_id: event._id
 		}).get();

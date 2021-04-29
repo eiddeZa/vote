@@ -4,7 +4,7 @@
 		<u-swiper mode="rect" :list="slideShowlist" duration="3000" :effect3d="true"></u-swiper>
 		<view class="hot_tit">
 			<image src="/static/image/hot.png" mode=""></image>
-			<text>热门活动</text>
+			<text @click="cs">热门活动</text>
 		</view>
 		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
 			<view class="activityImage">
@@ -27,7 +27,6 @@
 			<u-empty text="暂无数据" mode="list"></u-empty>
 		</view>
 		<u-loadmore v-else :status="status" :icon-type="iconType" :load-text="loadText" />
-
 
 		<u-tabbar :list="tabs" :mid-button="true" active-color="#f47347"></u-tabbar>
 	</view>
@@ -84,6 +83,13 @@
 			}
 		},
 		methods: {
+			cs(){
+				let detail={};
+				uni.navigateTo({
+					url: "../wxgzh/wxgzh?detailDate=" +
+						encodeURIComponent(JSON.stringify(detail)),
+				});
+			},
 			getList() {
 				let that = this;
 				uniCloud.callFunction({

@@ -41,11 +41,9 @@
   height: 190rpx;
   border: 4rpx solid #fff;
   margin: 0 auto 0;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   overflow: hidden;
-  -webkit-box-shadow: 2rpx 0 10rpx rgba(50, 50, 50, 0.3);
-          box-shadow: 2rpx 0 10rpx rgba(50, 50, 50, 0.3);
+  box-shadow: 2rpx 0 10rpx rgba(50, 50, 50, 0.3);
 }
 .auth-title.data-v-b237504c {
   color: #585858;
@@ -66,8 +64,7 @@
   background: #04be01;
   color: #fff;
   font-size: 30rpx;
-  -webkit-border-radius: 999rpx;
-          border-radius: 999rpx;
+  border-radius: 999rpx;
   text-align: center;
 }
 .login-btn .button.data-v-b237504c::after {
@@ -83,8 +80,7 @@
   background: #dfdfdf;
   color: #fff;
   font-size: 30rpx;
-  -webkit-border-radius: 999rpx;
-          border-radius: 999rpx;
+  border-radius: 999rpx;
   text-align: center;
 }
 .no-login-btn .button.data-v-b237504c::after {

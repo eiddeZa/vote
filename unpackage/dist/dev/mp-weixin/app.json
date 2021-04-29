@@ -7,7 +7,9 @@
     "pages/textVote/textVote",
     "pages/detail/detail",
     "pages/ImageTextVote/ImageTextVote",
-    "pages/mineIssue/mineIssue"
+    "pages/mineIssue/mineIssue",
+    "pages/videoTextVote/videoTextVote",
+    "pages/wxgzh/wxgzh"
   ],
   "subPackages": [],
   "window": {
@@ -42,6 +44,5 @@
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

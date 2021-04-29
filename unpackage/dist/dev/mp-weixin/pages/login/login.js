@@ -156,12 +156,6 @@ var _default =
       code: '' };
 
   },
-
-  created: function created() {
-    // 获取code
-    // this.getCode()
-  },
-
   methods: {
     // 获取code
     // https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html

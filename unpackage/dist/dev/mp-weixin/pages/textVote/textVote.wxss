@@ -29,12 +29,12 @@ page {
 }
 .content_1 {
   margin: 20rpx;
-  background: #FFFFFF;
+  background: #ffffff;
   padding: 10rpx;
 }
 .titleOption {
   font-weight: 300;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 34rpx;
   text-shadow: 0px 0px 2px #000;
   margin: 14rpx 20rpx;
@@ -43,6 +43,7 @@ page {
   padding: 0;
 }
 .voteOptionContent .u-input {
+  width: 98%;
   margin-left: 10rpx;
 }
 .voteOptionContent .addItem {

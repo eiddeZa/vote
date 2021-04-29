@@ -26,7 +26,7 @@ exports.main = async (event, context) => {
 					updateInfo: dbCmd.set({
 							...event.userInfo
 						  })
-				  },
+				  }
 			})
 		}
 		res = await collection.doc(event._id).update({
@@ -43,7 +43,7 @@ exports.main = async (event, context) => {
 			pageview: event.pageview
 		})
 	} else if (event.name == "textVote" && event._id) {
-		const collection = db.collection('vote_list');
+		const collection = db.collection('textVote_list');
 		res = await collection.doc(event._id).update({
 			pageview: event.pageview
 		})

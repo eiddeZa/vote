@@ -30,8 +30,7 @@
 }
 .u-picker-view.data-v-d45639b2 {
   height: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 .u-picker-header.data-v-d45639b2 {
   width: 100%;
@@ -52,8 +51,7 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 30rpx;
   background: #fff;
   position: relative;
@@ -103,8 +101,7 @@
 }
 .u-btn-picker.data-v-d45639b2 {
   padding: 16rpx;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   text-align: center;
   text-decoration: none;
 }

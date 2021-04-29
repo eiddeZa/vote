@@ -27,8 +27,7 @@
 .u-grid.data-v-50bc7b32 {
   width: 100%;
   position: relative;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
 }
 

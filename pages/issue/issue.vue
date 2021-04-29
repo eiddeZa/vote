@@ -28,7 +28,7 @@
 			</view>
 		</view>
 
-		<view class="selectItem bgc3" @click="gopage('default')">
+		<view class="selectItem bgc3" @click="gopage('videoTextVote')">
 			<view>
 				<view class="itemTit">
 					视频投票
@@ -82,7 +82,11 @@
 					uni.navigateTo({
 						url: '../ImageTextVote/ImageTextVote'
 					});
-				} else {
+				} else if (page == "videoTextVote") {
+					uni.navigateTo({
+						url: '../videoTextVote/videoTextVote'
+					});
+				}else {
 					this.$refs.uToast.show({
 						type:"error",
 						title: "努力开发中，敬请期待！",

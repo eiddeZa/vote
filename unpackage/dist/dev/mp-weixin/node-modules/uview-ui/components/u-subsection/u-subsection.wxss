@@ -74,16 +74,12 @@
   border-right: none !important;
 }
 .u-item-first.data-v-244377f2 {
-  -webkit-border-top-left-radius: 8rpx;
-          border-top-left-radius: 8rpx;
-  -webkit-border-bottom-left-radius: 8rpx;
-          border-bottom-left-radius: 8rpx;
+  border-top-left-radius: 8rpx;
+  border-bottom-left-radius: 8rpx;
 }
 .u-item-last.data-v-244377f2 {
-  -webkit-border-top-right-radius: 8rpx;
-          border-top-right-radius: 8rpx;
-  -webkit-border-bottom-right-radius: 8rpx;
-          border-bottom-right-radius: 8rpx;
+  border-top-right-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
 }
 .u-item-text.data-v-244377f2 {
   -webkit-transition: all 0.35s;

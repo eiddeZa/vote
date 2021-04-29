@@ -101,8 +101,7 @@ page {
   border: 1px solid #dcdcdc;
   padding: 36rpx;
   width: 100%;
-  -webkit-border-radius: 10rpx;
-          border-radius: 10rpx;
+  border-radius: 10rpx;
 }
 .content_1 {
   width: 100%;
