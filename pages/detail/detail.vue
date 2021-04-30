@@ -43,9 +43,12 @@
 			</view>
 		</view>
 
-		<view class="hdOption" v-for="(item, index) in data.voteItemlist" :key="index">
-			<view class="imgOption" v-if="item.imgList">
+		<view class="hdOption" :style="data.voteType=='videoTextVote'?'flex-wrap:wrap;':'flex-wrap:nowrap;'" v-for="(item, index) in data.voteItemlist" :key="index">
+			<view class="imgOption" v-if="data.voteType=='ImageTextVote'">
 				<image @click="selectImage(item.imgList)" :src="item.imgList[0]" style="width:110rpx;height:110rpx;overflow:hidden;border-radius: 10rpx;"></image>
+			</view>
+			<view class="videoOption" v-if="data.voteType=='videoTextVote'">
+				<video :src="item.video" style="width:100%;height:100%;"></video>
 			</view>
 			<view :class="activeItem == index ? 'hdOptionBtn active-bgc' : 'hdOptionBtn'" @click="selectItme(index, item)">
 				<text>{{ item.content }}</text>
@@ -124,6 +127,8 @@ export default {
 				data: {
 					name: that.banner.type,
 					_id: that.banner._id,
+					voteType:that.data.voteType,
+					switchVal:that.data.switchVal
 				},
 				success(res) {
 					console.log(res);
@@ -158,18 +163,14 @@ export default {
 					title: '提交中...',
 					mask: true
 				});
-				console.log({
-					name: that.banner.type,
-					_id: that.banner._id,
-					userInfo: uni.getStorageSync('userInfo')
-				});
 				uniCloud.callFunction({
 					name: 'update_vote',
 					data: {
 						name: that.banner.type,
 						_id: that.banner._id,
-						voteData:this.activeobj,
-						userInfo: uni.getStorageSync('userInfo')
+						voteData:that.activeobj,
+						userInfo: uni.getStorageSync('userInfo'),
+						switchVal:that.data.switchVal
 					},
 					success(res) {
 						uni.hideLoading();
@@ -268,7 +269,6 @@ page {
 	margin-bottom: 60rpx;
 	display: flex;
 	padding: 0 15px;
-
 	.imgOption {
 		width: 110rpx;
 		height: 110rpx;
@@ -276,7 +276,10 @@ page {
 		flex-grow: 0;
 		felx-shrink: 0;
 	}
-
+	.videoOption{
+		width: 100%;
+		height: 400rpx;
+	}
 	.hdOptionBtn {
 		border: 1px solid #dcdcdc;
 		padding: 36rpx;

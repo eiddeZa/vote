@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uSubsection: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-subsection/u-subsection */ "node-modules/uview-ui/components/u-subsection/u-subsection").then(__webpack_require__.bind(null, /*! uview-ui/components/u-subsection/u-subsection.vue */ 394))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-subsection/u-subsection */ "node-modules/uview-ui/components/u-subsection/u-subsection").then(__webpack_require__.bind(null, /*! uview-ui/components/u-subsection/u-subsection.vue */ 402))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 263))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-icon/u-icon */ "node-modules/uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! uview-ui/components/u-icon/u-icon.vue */ 271))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 277))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 285))
     }
   }
 } catch (e) {
@@ -205,6 +205,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -230,7 +233,7 @@ var _default =
         loading: "努力加载中",
         nomore: "没有更多了" },
 
-      requestName: "get_votelist" };
+      voteType: "textVote" };
 
   },
   onLoad: function onLoad(event) {
@@ -265,11 +268,11 @@ var _default =
       this.activityList = [];
       this.page = 1;
       if (this.activeName == "文字投票") {
-        this.requestName = "get_votelist";
+        this.voteType = "textVote";
       } else if (this.activeName == "图文投票") {
-        this.requestName = "get_ImageTextVote";
-      } else {
-        return false;
+        this.voteType = "ImageTextVote";
+      } else if (this.activeName == "视频投票") {
+        this.voteType = "videoTextVote";
       }
       this.getList();
     },
@@ -279,9 +282,10 @@ var _default =
         title: '加载中...' });
 
       uniCloud.callFunction({
-        name: that.requestName,
+        name: "get_vote",
         data: {
-          openid: "omYkt447GHtxQyuXmQT9IKuNH-ek",
+          voteType: that.voteType,
+          openid: uni.getStorageSync('userInfo').openid,
           paging: {
             page: that.page,
             limit: 5 } },
@@ -310,6 +314,7 @@ var _default =
 
     },
     goDetail: function goDetail(item) {
+      console.log(item.voteType);
       var detail = {
         title: item.activityTitle,
         _id: item._id,

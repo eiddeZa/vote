@@ -6,8 +6,11 @@
 		</view>
 
 		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
-			<view class="activityImage" v-if="activeName!='文字投票'">
+			<view class="activityImage" v-if="item.voteType=='ImageTextVote'">
 				<image :src="item.voteItemlist[0].imgList[0]" mode=""></image>
+			</view>
+			<view class="activityImage" v-if="item.voteType=='videoTextVote'"  @click.stop="">
+				<video :src="item.voteItemlist[0].video" style="width: 100%; height: 100%"></video>
 			</view>
 			<view class="activityContent">
 				<view class="activityTit">
@@ -50,7 +53,7 @@
 					loading: "努力加载中",
 					nomore: "没有更多了",
 				},
-				requestName: "get_votelist"
+				voteType: "textVote"
 			}
 		},
 		onLoad(event) {
@@ -85,11 +88,11 @@
 				this.activityList = [];
 				this.page=1;
 				if (this.activeName == "文字投票") {
-					this.requestName = "get_votelist";
+					this.voteType = "textVote";
 				} else if (this.activeName == "图文投票") {
-					this.requestName = "get_ImageTextVote";
-				} else {
-					return false;
+					this.voteType = "ImageTextVote";
+				} else if (this.activeName == "视频投票") {
+					this.voteType = "videoTextVote";
 				}
 				this.getList();
 			},
@@ -99,9 +102,10 @@
 					title: '加载中...'
 				});
 				uniCloud.callFunction({
-					name: that.requestName,
+					name: "get_vote",
 					data: {
-						openid: "omYkt447GHtxQyuXmQT9IKuNH-ek",
+						voteType:that.voteType,
+						openid:uni.getStorageSync('userInfo').openid,
 						paging: {
 							page: that.page,
 							limit: 5,
@@ -130,6 +134,7 @@
 				});
 			},
 			goDetail(item){
+				console.log(item.voteType);
 				let detail = {
 					title: item.activityTitle,
 					_id: item._id,

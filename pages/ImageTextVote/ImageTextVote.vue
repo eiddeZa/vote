@@ -455,7 +455,7 @@ export default {
 		ViewImage(index) {
 			uni.previewImage({
 				urls: this.obj.voteItemlist[index].imgList,
-				current: event.currentTarget.dataset.url
+				current:0
 			});
 		},
 		//删除图片

@@ -7,8 +7,11 @@
 			<text @click="cs">热门活动</text>
 		</view>
 		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
-			<view class="activityImage">
+			<view class="activityImage" v-if="item.voteType=='ImageTextVote'">
 				<image :src="item.voteItemlist[0].imgList[0]" mode=""></image>
+			</view>
+			<view class="activityImage" v-if="item.voteType=='videoTextVote'" @click.stop="">
+				<video :src="item.voteItemlist[0].video" style="width: 100%; height: 100%"></video>
 			</view>
 			<view class="activityContent">
 				<view class="activityTit">

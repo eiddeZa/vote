@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-avatar/u-avatar */ "node-modules/uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! uview-ui/components/u-avatar/u-avatar.vue */ 298))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-avatar/u-avatar */ "node-modules/uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! uview-ui/components/u-avatar/u-avatar.vue */ 306))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-tag/u-tag */ "node-modules/uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! uview-ui/components/u-tag/u-tag.vue */ 387))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-tag/u-tag */ "node-modules/uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! uview-ui/components/u-tag/u-tag.vue */ 395))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 305))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-button/u-button */ "node-modules/uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! uview-ui/components/u-button/u-button.vue */ 313))
     }
   }
 } catch (e) {
@@ -160,6 +160,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni, uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
 //
 //
 //
@@ -284,7 +287,9 @@ var _default =
         name: 'updatePageView',
         data: {
           name: that.banner.type,
-          _id: that.banner._id },
+          _id: that.banner._id,
+          voteType: that.data.voteType,
+          switchVal: that.data.switchVal },
 
         success: function success(res) {
           console.log(res);
@@ -319,18 +324,14 @@ var _default =
           title: '提交中...',
           mask: true });
 
-        console.log({
-          name: that.banner.type,
-          _id: that.banner._id,
-          userInfo: uni.getStorageSync('userInfo') });
-
         uniCloud.callFunction({
           name: 'update_vote',
           data: {
             name: that.banner.type,
             _id: that.banner._id,
-            voteData: this.activeobj,
-            userInfo: uni.getStorageSync('userInfo') },
+            voteData: that.activeobj,
+            userInfo: uni.getStorageSync('userInfo'),
+            switchVal: that.data.switchVal },
 
           success: function success(res) {
             uni.hideLoading();

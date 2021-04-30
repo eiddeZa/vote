@@ -21,7 +21,12 @@ exports.main = async (event, context) => {
 		res = await collection.where({
 			_id: event._id
 		}).get();
-	} else {
+	}  else if (event.type == "videoTextVote" && event._id) {
+		const collection = db.collection('videoTextVote_list');
+		res = await collection.where({
+			_id: event._id
+		}).get();
+	}else {
 		return {
 			code: -1,
 			msg: '参数错误',

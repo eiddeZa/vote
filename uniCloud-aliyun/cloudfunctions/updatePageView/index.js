@@ -7,16 +7,57 @@ exports.main = async (event, context) => {
 	let res ;
 	if (event.name == "hotList" && event._id) {
 		const collection = db.collection('hot_list');
+
+
+		if(event.switchVal==true&&event.voteType=="ImageTextVote"){
+			const imagelist = db.collection('imageTextVote_list');
+			await imagelist.doc(event._id).update({
+				pageview: dbCmd.inc(1)
+			})
+		}else if(event.switchVal==true&&event.voteType=="videoTextVote"){
+			const videoTextVote = db.collection('videoTextVote_list');
+			await videoTextVote.doc(event._id).update({
+				pageview: dbCmd.inc(1)
+			})
+		}else if(event.switchVal==true&&event.voteType=="textVote"){
+			const textVote = db.collection('textVote_list');
+			await textVote.doc(event._id).update({
+				pageview: dbCmd.inc(1)
+			})
+		}
 		res = await collection.doc(event._id).update({
 		    pageview: dbCmd.inc(1)
 		})
 	} else if (event.name == "ImageTextVote" && event._id) {
 		const collection = db.collection('imageTextVote_list');
+		if(event.switchVal==true){
+			const hotlist = db.collection('hot_list');
+			await hotlist.doc(event._id).update({
+				pageview: dbCmd.inc(1)
+			})
+		}
 		res = await collection.doc(event._id).update({
 		    pageview: dbCmd.inc(1)
 		})
 	} else if (event.name == "textVote" && event._id) {
 		const collection = db.collection('textVote_list');
+		if(event.switchVal==true){
+			const hotlist = db.collection('hot_list');
+			await hotlist.doc(event._id).update({
+				pageview: dbCmd.inc(1)
+			})
+		}
+		res = await collection.doc(event._id).update({
+		    pageview: dbCmd.inc(1)
+		})
+	}else if (event.name == "videoTextVote" && event._id) {
+		const collection = db.collection('videoTextVote_list');
+		if(event.switchVal==true){
+			const hotlist = db.collection('hot_list');
+			await hotlist.doc(event._id).update({
+				pageview: dbCmd.inc(1)
+			})
+		}
 		res = await collection.doc(event._id).update({
 		    pageview: dbCmd.inc(1)
 		})
