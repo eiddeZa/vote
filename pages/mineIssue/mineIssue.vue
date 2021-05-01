@@ -5,11 +5,12 @@
 			</u-subsection>
 		</view>
 
-		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
+		<view class="activityList" :index="index" v-for="(item, index) in activityList" :key="index"
+			@click="goDetail(item)">
 			<view class="activityImage" v-if="item.voteType=='ImageTextVote'">
 				<image :src="item.voteItemlist[0].imgList[0]" mode=""></image>
 			</view>
-			<view class="activityImage" v-if="item.voteType=='videoTextVote'"  @click.stop="">
+			<view class="activityImage" v-if="item.voteType=='videoTextVote'" @click.stop="">
 				<video :src="item.voteItemlist[0].video" style="width: 100%; height: 100%"></video>
 			</view>
 			<view class="activityContent">
@@ -17,13 +18,19 @@
 					<u-icon class="iconz" color="#f16131" name="grid-fill" size="28"></u-icon>{{item.activityTitle}}
 				</view>
 				<view class="activityNum">
-					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>浏览{{item.pageview}}次,已投票 {{item.voteItemlist | total}}
+					<u-icon class="iconz" color="#f16131" name="heart-fill" size="28"></u-icon>
+					浏览{{item.pageview}}次,已投票
+					{{item.voteItemlist | total}}
 				</view>
 				<view class="activityEndTime">
 					<u-icon class="iconz" color="#f16131" name="clock-fill" size="28"></u-icon>{{item.endTime}} 结束
 				</view>
+				<view class="delBtnBox">
+					<u-button size="mini" type="error" @click="deleteInfo(item,index)">删除</u-button>
+				</view>
 			</view>
 		</view>
+
 		<u-loadmore :status="status" :icon-type="iconType" :load-text="loadText" />
 	</view>
 </template>
@@ -73,9 +80,9 @@
 		},
 		filters: {
 			total(data) {
-				let num=0;
-				for(let i=0;i<data.length;i++){
-					num=num+data[i].vote;
+				let num = 0;
+				for (let i = 0; i < data.length; i++) {
+					num = num + data[i].vote;
 				}
 				return num;
 			}
@@ -86,7 +93,7 @@
 				this.swiperCurrent = index;
 				this.activeName = this.list[index].name;
 				this.activityList = [];
-				this.page=1;
+				this.page = 1;
 				if (this.activeName == "文字投票") {
 					this.voteType = "textVote";
 				} else if (this.activeName == "图文投票") {
@@ -104,8 +111,9 @@
 				uniCloud.callFunction({
 					name: "get_vote",
 					data: {
-						voteType:that.voteType,
-						openid:uni.getStorageSync('userInfo').openid,
+						voteType: that.voteType,
+						openid: uni.getStorageSync('userInfo').openid,
+						status: that.banner.status,
 						paging: {
 							page: that.page,
 							limit: 5,
@@ -133,18 +141,54 @@
 					}
 				});
 			},
-			goDetail(item){
+			//删除
+			deleteInfo(item, index) {
+				let that = this;
+				uni.showLoading({
+					title: '删除中...'
+				});
+				uniCloud.callFunction({
+					name: "del_vote",
+					data: {
+						name: item.voteType,
+						_id: item._id,
+						switchVal: item.switchVal
+					},
+					success(res) {
+						console.log(res);
+						uni.hideLoading();
+						if (res.result == "") {
+							uni.showToast({
+								title: "删除成功",
+								duration: 2000
+							});
+							that.activityList.splice(index, 1);;
+						} else {
+							that.$operate.toast({
+								title: res.result.msg
+							})
+						}
+					},
+					fail(error) {
+						uni.hideLoading();
+						that.$operate.toast({
+							title: "网络请求错误！"
+						})
+					}
+				});
+			},
+			goDetail(item) {
 				console.log(item.voteType);
 				let detail = {
 					title: item.activityTitle,
 					_id: item._id,
-					type:item.voteType
+					type: item.voteType
 				};
 				console.log(detail);
 				uni.navigateTo({
 					url: "../detail/detail?detailDate=" +
 						encodeURIComponent(JSON.stringify(detail)),
-				});	
+				});
 			}
 		}
 	}
@@ -159,7 +203,7 @@
 		padding: 30rpx;
 	}
 
-	//
+	//容器
 	.activityList {
 		margin: 30rpx;
 		border-radius: 10rpx;
@@ -200,5 +244,8 @@
 			}
 		}
 
+		.delBtnBox {
+			text-align: end;
+		}
 	}
 </style>

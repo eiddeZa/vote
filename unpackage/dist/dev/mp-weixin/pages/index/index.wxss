@@ -41,9 +41,11 @@
 }
 .activityList {
   margin: 30rpx;
-  border-radius: 10rpx;
+  -webkit-border-radius: 10rpx;
+          border-radius: 10rpx;
   overflow: hidden;
-  box-shadow: #dedede 0px 0px 10px;
+  -webkit-box-shadow: #dedede 0px 0px 10px;
+          box-shadow: #dedede 0px 0px 10px;
 }
 .activityList .activityImage {
   width: 100%;

@@ -88,6 +88,24 @@
             
         }
        
+        ,{
+            "path" : "pages/poster/poster",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "生成海报",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/rankinglist/rankinglist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

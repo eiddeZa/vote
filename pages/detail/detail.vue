@@ -18,10 +18,21 @@
 				<view class="enddate" v-else>{{ data.startTime }} 开始</view>
 			</view>
 		</view>
-		<view class="tit">{{ data.activityTitle }}</view>
+	
+		<view class="titInfo1">
+			<view class="tit">{{ data.activityTitle }}</view>
+			<view class="sharer_">
+				<u-button  size="mini" @click="shareBtn">
+					<u-icon name="zhuanfa"></u-icon>分享
+				</u-button>
+			</view>
+		</view>
+		
 
 		<view class="hd_rule">
-			<view class=""><u-tag text="投票规则" type="warning" mode="dark" /></view>
+			<view class="">
+				<u-tag text="投票规则" type="warning" mode="dark" />
+			</view>
 			<view class="item_rule">
 				<view class="startTit">开始时间</view>
 				<view class="">{{ data.startTime }}</view>
@@ -35,282 +46,417 @@
 				<view class="">每人{{ data.voteMoreTxt }}</view>
 			</view>
 		</view>
-
 		<view class="hd_rule">
-			<view class=""><u-tag text="投票详情" type="warning" mode="dark" /></view>
+			<view class="">
+				<u-tag text="投票详情" type="warning" mode="dark" />
+			</view>
 			<view class="item_rule">
 				<view>{{ data.voteIntroduce }}</view>
 			</view>
 		</view>
 
-		<view class="hdOption" :style="data.voteType=='videoTextVote'?'flex-wrap:wrap;':'flex-wrap:nowrap;'" v-for="(item, index) in data.voteItemlist" :key="index">
+		<view class="hdOption" :style="data.voteType=='videoTextVote'?'flex-wrap:wrap;':'flex-wrap:nowrap;'"
+			v-for="(item, index) in data.voteItemlist" :key="index">
 			<view class="imgOption" v-if="data.voteType=='ImageTextVote'">
-				<image @click="selectImage(item.imgList)" :src="item.imgList[0]" style="width:110rpx;height:110rpx;overflow:hidden;border-radius: 10rpx;"></image>
+				<image @click="selectImage(item.imgList)" :src="item.imgList[0]"
+					style="width:110rpx;height:110rpx;overflow:hidden;border-radius: 10rpx;"></image>
 			</view>
 			<view class="videoOption" v-if="data.voteType=='videoTextVote'">
 				<video :src="item.video" style="width:100%;height:100%;"></video>
 			</view>
-			<view :class="activeItem == index ? 'hdOptionBtn active-bgc' : 'hdOptionBtn'" @click="selectItme(index, item)">
+			<view :class="activeItem == index ? 'hdOptionBtn active-bgc' : 'hdOptionBtn'"
+				@click="selectItme(index, item)">
 				<text>{{ item.content }}</text>
+				<u-count-to :start-val="0"  font-size="40" :end-val="item.vote+''" class="voteNum"></u-count-to>
 				<!-- <u-icon name="checkbox-mark" color="#2979ff" size="28"></u-icon> -->
 			</view>
 		</view>
 
 		<view class="zwf_"></view>
-		<view class="content_1"><u-button shape="circle" class="custom-style" @click="submitData" :ripple="true">投票</u-button></view>
+		<view class="content_1">
+			<u-button shape="circle" class="custom-style" @click="submitData" :ripple="true">投票</u-button>
+		</view>
+
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			banner: '',
-			src: '',
-			creatName: '',
-			data: '',
-			activeItem: '*',
-			activeobj: {}
-		};
-	},
-	onLoad(event) {
-		// TODO 后面把参数名替换成 payload
-		const payload = event.detailDate || event.payload;
-		// 目前在某些平台参数会被主动 decode，暂时这样处理。
-		try {
-			this.banner = JSON.parse(decodeURIComponent(payload));
-		} catch (error) {
-			this.banner = JSON.parse(payload);
-		}
-		console.log(this.banner);
-		uni.setNavigationBarTitle({
-			title: this.banner.title
-		});
-		this.getDetail();
-	},
-	methods: {
-		getDetail() {
-			uni.showLoading({
-				title: '加载中...',
-				mask: true
+	export default {
+		data() {
+			return {
+				banner: '',
+				src: '',
+				creatName: '',
+				data: '',
+				activeItem: '*',
+				activeobj: {},
+			}
+		},
+		onLoad(event) {
+			// TODO 后面把参数名替换成 payload
+			const payload = event.detailDate || event.payload;
+			// 目前在某些平台参数会被主动 decode，暂时这样处理。
+			try {
+				this.banner = JSON.parse(decodeURIComponent(payload));
+			} catch (error) {
+				this.banner = JSON.parse(payload);
+			}
+			console.log(this.banner);
+			uni.setNavigationBarTitle({
+				title: this.banner.title
 			});
-			let that = this;
-			console.log(that.banner.type);
-			uniCloud.callFunction({
-				name: 'getDetail',
-				data: {
-					_id: that.banner._id,
-					type: that.banner.type
-				},
-				success(res) {
-					uni.hideLoading();
-					console.log(res);
-					if (res.result.data) {
-						that.data = res.result.data[0];
-						that.src = that.data.creatUserInfo.avatarUrl;
-						that.creatName = that.data.creatUserInfo.nickName;
-						that.updateView();
-					}
-				},
-				fail(error) {
-					uni.hideLoading();
-					that.$operate.toast({
-						title: '网络请求错误！'
-					});
+			this.getDetail();
+			console.log(this.getUrl());
+		},
+		//分享给朋友
+		onShareAppMessage(res) {
+			return {
+				title: this.banner.title,
+				path: this.getUrl(),
+				success: res => {
+					console.info(res)
 				}
-			});
+			}
 		},
-		updateView() {
-			let that = this;
-			uniCloud.callFunction({
-				name: 'updatePageView',
-				data: {
-					name: that.banner.type,
-					_id: that.banner._id,
-					voteType:that.data.voteType,
-					switchVal:that.data.switchVal
-				},
-				success(res) {
-					console.log(res);
-					if (res.result.data) {
-						that.data = res.result.data[0];
-						that.src = that.data.creatUserInfo.avatarUrl;
-						that.creatName = that.data.creatUserInfo.nickName;
-					}
-				},
-				fail(error) {
-					that.$operate.toast({
-						title: '网络请求错误！'
-					});
+		//分享到朋友圈
+		onShareTimeline(res) {
+			return {
+				title: "迅投，快来投票吧！",
+				query: this.getUrl(),
+			}
+		},
+		filters: {
+			total(data) {
+				let num=0;
+				for(let i=0;i<data.length;i++){
+					num=num+data[i].vote;
 				}
-			});
+				return num;
+			}
 		},
-		selectItme(index, item) {
-			this.activeItem = index;
-			this.activeobj = item;
-			console.log(index, item);
-		},
-		selectImage(url) {
-			uni.previewImage({
-				urls: url,
-				current: 0
-			});
-		},
-		submitData() {
-			if (JSON.stringify(this.activeobj) != '{}') {
-				let that = this;
-				uni.showLoading({
-					title: '提交中...',
-					mask: true
-				});
+		methods: {
+			getUrl() {
+				let pages = getCurrentPages() //获取加载的页面
+				let currentPage = pages[pages.length - 1] //获取当前页面的对象
+				let url = currentPage.route //当前页面url
+				let options = currentPage.options //如果要获取url中所带的参数可以查看options    参数多时通过&拼接url的参数
+				let urlWithArgs = url + '?'
+				for (let key in options) {
+					let value = options[key]
+					urlWithArgs += key + '=' + value + '&'
+				}
+				urlWithArgs = urlWithArgs.substring(0, urlWithArgs.length - 1)
+				return urlWithArgs;
+			},
+			// 分享
+			shareBtn(){
+				let obj={
+					pagePath:this.getUrl()
+				};
+				// uni.navigateTo({
+				// 	url: "../poster/poster?obj=" +
+				// 		encodeURIComponent(JSON.stringify(obj)),
+				// });
+				let that=this;
 				uniCloud.callFunction({
-					name: 'update_vote',
+					name: 'qrCode',
 					data: {
-						name: that.banner.type,
-						_id: that.banner._id,
-						voteData:that.activeobj,
-						userInfo: uni.getStorageSync('userInfo'),
-						switchVal:that.data.switchVal
+						path: this.getUrl(),
 					},
 					success(res) {
-						uni.hideLoading();
 						console.log(res);
-						if (res.result.updated) {
-							that.activeItem='*';
-							that.activeobj={};
-							uni.showToast({
-								title: "投票成功",
-								duration: 2000
-							});
-						}else{
-							that.$operate.toast({
-								title: res.result.msg
-							})
-						}
 					},
 					fail(error) {
-						console.log(error);
+						console.log(error)
 						uni.hideLoading();
 						that.$operate.toast({
 							title: '网络请求错误！'
 						});
 					}
 				});
-			} else {
-				this.$operate.toast({
-					title: '请选择投票项！'
+			},
+			getDetail() {
+				uni.showLoading({
+					title: '加载中...',
+					mask: true
 				});
+				let that = this;
+				console.log(that.banner.type);
+				uniCloud.callFunction({
+					name: 'getDetail',
+					data: {
+						_id: that.banner._id,
+						type: that.banner.type
+					},
+					success(res) {
+						uni.hideLoading();
+						console.log(res);
+						if (res.result.data) {
+							that.data = res.result.data[0];
+							that.src = that.data.creatUserInfo.avatarUrl;
+							that.creatName = that.data.creatUserInfo.nickName;
+							that.updateView();
+						}
+					},
+					fail(error) {
+						uni.hideLoading();
+						that.$operate.toast({
+							title: '网络请求错误！'
+						});
+					}
+				});
+			},
+			updateView() {
+				let that = this;
+				uniCloud.callFunction({
+					name: 'updatePageView',
+					data: {
+						name: that.banner.type,
+						_id: that.banner._id,
+						voteType: that.data.voteType,
+						switchVal: that.data.switchVal
+					},
+					success(res) {
+						console.log(res);
+						if (res.result.data) {
+							that.data = res.result.data[0];
+							that.src = that.data.creatUserInfo.avatarUrl;
+							that.creatName = that.data.creatUserInfo.nickName;
+						}
+					},
+					fail(error) {
+						that.$operate.toast({
+							title: '网络请求错误！'
+						});
+					}
+				});
+			},
+			selectItme(index, item) {
+				this.activeItem = index;
+				this.activeobj = item;
+				console.log(index, item);
+			},
+			selectImage(url) {
+				uni.previewImage({
+					urls: url,
+					current: 0
+				});
+			},
+			submitData() {
+				if (JSON.stringify(this.activeobj) != '{}') {
+					let that = this;
+					uni.showLoading({
+						title: '提交中...',
+						mask: true
+					});
+					uniCloud.callFunction({
+						name: 'update_vote',
+						data: {
+							name: that.banner.type,
+							_id: that.banner._id,
+							voteData: that.activeobj,
+							userInfo: uni.getStorageSync('userInfo'),
+							switchVal: that.data.switchVal
+						},
+						success(res) {
+							uni.hideLoading();
+							console.log(res);
+							if (res.result.updated) {
+								that.activeItem = '*';
+								that.activeobj = {};
+								uni.showToast({
+									title: "投票成功",
+									duration: 2000
+								});
+							} else {
+								that.$operate.toast({
+									title: res.result.msg
+								})
+							}
+						},
+						fail(error) {
+							console.log(error);
+							uni.hideLoading();
+							that.$operate.toast({
+								title: '网络请求错误！'
+							});
+						}
+					});
+				} else {
+					this.$operate.toast({
+						title: '请选择投票项！'
+					});
+				}
+			},
+			aaa() {
+				uni.getImageInfo({
+					src: canvasimg,
+					success(ret) {
+						uni.getSetting({
+							success: res => {
+								if (!res.authSetting['scope.writePhotosAlbum']) {
+									uni.authorize({
+										scope: 'scope.writePhotosAlbum',
+										success() {
+											//这里是用户同意授权后的回调
+											uni.saveImageToPhotosAlbum({
+												filePath: ret.path,
+												success() {
+													uni.showToast({
+														title: '保存成功',
+														icon: 'success',
+														duration: 2000
+													})
+												}
+											})
+										},
+										fail() {
+											//这里是用户拒绝授权后的回调
+											console.log('失败')
+											setShowModal(true)
+										}
+									})
+								} else {
+									//用户已经授权过了
+									console.log('已经授权过')
+									uni.saveImageToPhotosAlbum({
+										filePath: ret.path,
+										success() {
+											uni.showToast({
+												title: '保存成功',
+												icon: 'success',
+												duration: 2000
+											})
+										}
+									})
+								}
+							}
+						})
+					}
+				})
 			}
 		}
-	}
-};
+	};
 </script>
 
 <style lang="scss">
-page {
-	background: #ffffff;
-}
+	page {
+		background: #ffffff;
+	}
 
-.initiatorInfo {
-	background: #ffffff;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 30rpx;
-
-	.Info1 {
+	.initiatorInfo {
+		background: #ffffff;
 		display: flex;
+		justify-content: space-between;
 		align-items: center;
+		padding: 30rpx;
 
-		.uavatar {
-			margin-right: 20rpx;
+		.Info1 {
+			display: flex;
+			align-items: center;
+
+			.uavatar {
+				margin-right: 20rpx;
+			}
+		}
+
+		.name,
+		.tp_status {
+			line-height: 60rpx;
+		}
+
+		.tp_status {
+			text-align: right;
+		}
+
+		.fqr_txt,
+		.enddate {
+			color: #bababa;
+			// line-height: 40rpx;
 		}
 	}
-
-	.name,
-	.tp_status {
-		line-height: 60rpx;
-	}
-
-	.tp_status {
-		text-align: right;
-	}
-
-	.fqr_txt,
-	.enddate {
-		color: #bababa;
-		// line-height: 40rpx;
-	}
-}
-
-.tit {
-	// text-align: center;
+.titInfo1{
 	padding: 0 30rpx;
-	font-size: 36rpx;
-	margin-top: 60rpx;
+	margin-top: 40rpx;
+	display: flex;
+	.tit {
+		// text-align: center;
+		font-size: 36rpx;
+		width:85%;
+		margin-right: 20rpx;
+	}
+	.sharer_{
+	}
 }
+	.hd_rule {
+		padding: 30rpx;
+		font-size: 32rpx;
 
-.hd_rule {
-	padding: 30rpx;
-	font-size: 32rpx;
+		.item_rule {
+			margin: 36rpx 0;
+			display: flex;
 
-	.item_rule {
-		margin: 36rpx 0;
-		display: flex;
-
-		.startTit {
-			width: 200rpx;
-			font-weight: 600;
+			.startTit {
+				width: 200rpx;
+				font-weight: 600;
+			}
 		}
 	}
-}
 
-.hdOption {
-	margin-bottom: 60rpx;
-	display: flex;
-	padding: 0 15px;
-	.imgOption {
-		width: 110rpx;
-		height: 110rpx;
-		margin-right: 40rpx;
-		flex-grow: 0;
-		felx-shrink: 0;
+	.hdOption {
+		margin-bottom: 40rpx;
+		display: flex;
+		padding: 0 15px;
+
+		.imgOption {
+			width: 110rpx;
+			height: 110rpx;
+			margin-right: 40rpx;
+			flex-grow: 0;
+			felx-shrink: 0;
+		}
+
+		.videoOption {
+			width: 100%;
+			height: 400rpx;
+		}
+
+		.hdOptionBtn {
+			border: 1px solid #dcdcdc;
+			padding: 36rpx;
+			width: 100%;
+			border-radius: 10rpx;
+			font-size: 40rpx;
+		}
+		.voteNum{
+			margin-left: 20rpx;
+			float: right;
+		}
 	}
-	.videoOption{
+
+	.content_1 {
 		width: 100%;
-		height: 400rpx;
-	}
-	.hdOptionBtn {
-		border: 1px solid #dcdcdc;
-		padding: 36rpx;
-		width: 100%;
-		border-radius: 10rpx;
-	}
-}
+		position: fixed;
+		bottom: 0;
+		padding: 30rpx;
 
-.content_1 {
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	padding: 30rpx;
-
-	.custom-style {
-		background: #f16131 !important;
-		color: #ffffff !important;
-
-		/deep/ .u-btn--default {
+		.custom-style {
 			background: #f16131 !important;
 			color: #ffffff !important;
+
+			/deep/ .u-btn--default {
+				background: #f16131 !important;
+				color: #ffffff !important;
+			}
 		}
 	}
-}
 
-.zwf_ {
-	height: 140rpx;
-}
+	.zwf_ {
+		height: 140rpx;
+	}
 
-.active-bgc {
-	border-color: #f16131 !important;
-	background-color: #fbeadc;
-}
+	.active-bgc {
+		border-color: #f16131 !important;
+		background-color: #fbeadc;
+	}
 </style>

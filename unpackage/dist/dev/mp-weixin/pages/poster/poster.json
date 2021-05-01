@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "生成海报",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "mosowe-canvas-image": "/components/mosowe-canvas-image/mosowe-canvas-image"
+  }
+}

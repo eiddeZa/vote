@@ -1,0 +1,1 @@
+<view><mosowe-canvas-image class="vue-ref" vue-id="522988a0-1" lists="{{lists}}" height="300" width="300" showPreview="{{true}}" data-ref="mosoweCanvasComponents" data-event-opts="{{[['^canvasImage',[['_canvasImage']]]]}}" bind:canvasImage="__e" bind:__l="__l"></mosowe-canvas-image><image src="{{canvasUrl}}" mode="widthFix"></image></view>

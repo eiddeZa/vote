@@ -8,7 +8,7 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-		}
+		},
 	}
 </script>
 
@@ -16,8 +16,9 @@
 	@import "static/css/main.css";
 	@import "static/css/icon.css";
 	@import "uview-ui/index.scss";
+
 	/*每个页面公共css */
-	page{
+	page {
 		height: 100%;
 	}
 </style>

@@ -4,7 +4,7 @@
 		<u-swiper mode="rect" :list="slideShowlist" duration="3000" :effect3d="true"></u-swiper>
 		<view class="hot_tit">
 			<image src="/static/image/hot.png" mode=""></image>
-			<text @click="cs">热门活动</text>
+			<text>热门活动</text>
 		</view>
 		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
 			<view class="activityImage" v-if="item.voteType=='ImageTextVote'">
@@ -60,6 +60,23 @@
 					nomore: "没有更多了",
 				}
 			};
+		},
+		//分享给朋友
+		onShareAppMessage(res) {
+			return {
+				title: this.banner.title,
+				path: this.getUrl(),
+				success: res => {
+					console.info(res)
+				}
+			}
+		},
+		//分享到朋友圈
+		onShareTimeline(res) {
+			return {
+				title: "迅投，快来投票吧！",
+				query: this.getUrl(),
+			}
 		},
 		onLoad() {
 			this.tabs = this.$store.state.tabbarList;
@@ -134,11 +151,15 @@
 					type:"hotList"
 				};
 				console.log(detail);
+				// uni.navigateTo({
+				// 	url: "../detail/detail?detailDate=" +
+				// 		encodeURIComponent(JSON.stringify(detail)),
+				// });
 				uni.navigateTo({
-					url: "../detail/detail?detailDate=" +
+					url: "../rankinglist/rankinglist?detailDate=" +
 						encodeURIComponent(JSON.stringify(detail)),
 				});
-			},
+			}
 		},
 	};
 </script>

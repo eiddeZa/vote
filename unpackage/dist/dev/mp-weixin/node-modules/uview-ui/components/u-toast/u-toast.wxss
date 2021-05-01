@@ -31,7 +31,8 @@
   transition: opacity 0.3s;
   text-align: center;
   color: #fff;
-  border-radius: 8rpx;
+  -webkit-border-radius: 8rpx;
+          border-radius: 8rpx;
   background: #585858;
 
   display: -webkit-box;
