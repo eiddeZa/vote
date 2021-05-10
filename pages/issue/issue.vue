@@ -43,8 +43,8 @@
 		</view>
 
 		<view class="wrap">
-			<view class="demo-layout bgc1">
-				<image src="../../static/image/changjianwenti.png" mode=""></image>
+			<view class="demo-layout bgc1" @click="gofaq">
+				<image src="../../static/image/changjianwenti.png" mode="" ></image>
 				<view>常见问题</view>
 			</view>
 			<view class="demo-layout bgc2">
@@ -66,7 +66,7 @@
 	export default {
 		data() {
 			return {
-				tabs: "",
+				tabs: ""
 			};
 		},
 		onLoad() {
@@ -74,6 +74,14 @@
 		},
 		methods: {
 			gopage(page) {
+				if (uni.getStorageSync('userInfo') == '' || uni.getStorageSync('userInfo') == null) {
+					uni.showToast({
+						title: '请先登录！',
+						duration: 2000,
+						icon: 'none'
+					});
+					return false;
+				}
 				if (page == "textVote") {
 					uni.navigateTo({
 						url: '../textVote/textVote'
@@ -93,6 +101,11 @@
 						position: "top",
 					});
 				}
+			},
+			gofaq(){
+				uni.navigateTo({
+					url: '../FAQ/FAQ'
+				});
 			}
 		}
 	};

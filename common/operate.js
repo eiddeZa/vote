@@ -47,6 +47,53 @@ export default {
 		} finally {
 			uni.hideLoading()
 		}
+	},
+	// 获取当前时间
+	getTime() {
+		let date = new Date();
+		let y = date.getFullYear();
+		let m = date.getMonth() + 1;
+		let d = date.getDate();
+		let h = date.getHours();
+		let min = date.getMinutes();
+		// let s = date.getSeconds()
+		if (m >= 1 && m <= 9) {
+			m = `0${m}`;
+		}
+		if (d >= 1 && d <= 9) {
+			d = `0${d}`;
+		}
+		if (h >= 0 && h <= 9) {
+			h = `0${h}`;
+		}
+		if (min >= 0 && min <= 9) {
+			min = `0${min}`;
+		}
+		// if (s >= 0 && s <= 9) { min = `0${s}` }
+		return `${y}-${m}-${d} ${h}:${min}`;
+	},
+	// 获取当前时间的明天
+	getTomorrow() {
+		let date = new Date();
+		let y = date.getFullYear();
+		let m = date.getMonth() + 1;
+		let d = date.getDate()+1;
+		let h = date.getHours();
+		let min = date.getMinutes();
+		// let s = date.getSeconds()
+		if (m >= 1 && m <= 9) {
+			m = `0${m}`;
+		}
+		if (d >= 1 && d <= 9) {
+			d = `0${d}`;
+		}
+		if (h >= 0 && h <= 9) {
+			h = `0${h}`;
+		}
+		if (min >= 0 && min <= 9) {
+			min = `0${min}`;
+		}
+		// if (s >= 0 && s <= 9) { min = `0${s}` }
+		return `${y}-${m}-${d} ${h}:${min}`;
 	}
-
 }

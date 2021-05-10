@@ -102,7 +102,6 @@
 </template>
 
 <script>
-var moment = require('moment');
 export default {
 	data() {
 		return {
@@ -298,28 +297,19 @@ export default {
 					{
 						index: 1,
 						vote: 0, //票数
-						updateInfo: [], //更新用户信息
 						content: ''
 					},
 					{
 						index: 2,
 						vote: 0, //票数
-						updateInfo: [], //更新用户信息
 						content: ''
 					}
 				],
-				startTime: moment().format('YYYY-MM-DD HH:mm'),
-				endTime: moment()
-					.add({
-						y: 0,
-						M: 0,
-						d: 1,
-						h: 0,
-						m: 0
-					})
-					.format('YYYY-MM-DD HH:mm'),
+				startTime:this.$operate.getTime(),
+				endTime: this.$operate.getTomorrow(),
 				voteMoreTxt: '总共1次',
 				voteMore: '1',
+				updateInfo: [], //更新用户信息
 				switchVal: true,
 				status: 1,
 				openid: '',
@@ -328,13 +318,11 @@ export default {
 			}
 		};
 	},
-	onLoad() {},
 	methods: {
 		addItem() {
 			this.obj.voteItemlist.push({
 				index: this.obj.voteItemlist.length + 1,
 				vote: 0,
-				updateInfo: [], //更新用户信息
 				content: ''
 			});
 		},
@@ -376,7 +364,7 @@ export default {
 				this.obj.creatUserInfo = uni.getStorageSync('userInfo');
 				this.obj.openid = uni.getStorageSync('userInfo').openid;
 				//判断开始时间是否小于结束时间 小于只改为进行中状态2
-				if (this.compare(this.obj.startTime, moment().format('YYYY-MM-DD HH:mm')) == true) {
+				if (this.compare(this.obj.startTime,this.$operate.getTime()) == true) {
 					this.obj.status = 2;
 				}
 				let app = this;
@@ -470,28 +458,19 @@ export default {
 					{
 						index: 1,
 						vote: 0, //票数
-						updateInfo: [], //更新用户信息
 						content: ''
 					},
 					{
 						index: 2,
 						vote: 0, //票数
-						updateInfo: [], //更新用户信息
 						content: ''
 					}
 				],
-				startTime: moment().format('YYYY-MM-DD HH:mm'),
-				endTime: moment()
-					.add({
-						y: 0,
-						M: 0,
-						d: 1,
-						h: 0,
-						m: 0
-					})
-					.format('YYYY-MM-DD HH:mm'),
+				startTime:this.$operate.getTime(),
+				endTime: this.$operate.getTomorrow(),
 				voteMoreTxt: '总共1次',
 				voteMore: '1',
+				updateInfo: [], //更新用户信息
 				switchVal: true,
 				status: 1,
 				openid: '',

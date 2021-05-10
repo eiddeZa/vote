@@ -1,15 +1,17 @@
 <template>
 	<view>
+		<u-swiper mode="rect" :list="slideShowlist" duration="3000" :effect3d="true"></u-swiper>
+		
 		<view class="hot_tit">
-			<image src="/static/image/top.png" mode=""></image>
+			<image src="../../static/image/top.png" mode=""></image>
 			<text>排行榜</text>
 		</view>
 
 		<view class="hdOption" v-for="(item, index) in data.voteItemlist" :key="index">
 			<view class="hdOptionBtn">
-				<image v-if="index==0" src="/static/image/first.png" mode=""></image>
-				<image v-if="index==1" src="/static/image/second.png" mode=""></image>
-				<image v-if="index==2" src="/static/image/third.png" mode=""></image>
+				<image v-if="index==0" src="../../static/image/first.png" mode=""></image>
+				<image v-if="index==1" src="../../static/image/second.png" mode=""></image>
+				<image v-if="index==2" src="../../static/image/third.png" mode=""></image>
 				<text class="num" v-if="index>2">{{index}}</text>
 				<text>{{ item.content }}</text>
 				<u-count-to :start-val="0" font-size="40" :end-val="item.vote+''" class="voteNum"></u-count-to>
@@ -25,6 +27,16 @@
 	export default {
 		data() {
 			return {
+				slideShowlist: [{
+						image: require("../../static/image/imgList1.jpg"),
+					},
+					{
+						image: require("../../static/image/imgList2.jpg"),
+					},
+					{
+						image: require("../../static/image/imgList3.jpg"),
+					},
+				],
 				banner: '',
 				data: [],
 				status: 'nomore',
@@ -98,7 +110,6 @@
 		margin: 50rpx 0;
 		display: flex;
 		justify-content: center;
-
 		image {
 			width: 45rpx;
 			height: 45rpx;
@@ -110,20 +121,18 @@
 	.hdOption {
 		margin-bottom: 40rpx;
 		display: flex;
-		padding: 0 20rpx;
-
+		padding: 0 30rpx;
 		.hdOptionBtn {
 			border: 1px solid #dcdcdc;
-			padding: 36rpx;
+			padding: 28rpx;
 			width: 100%;
 			border-radius: 10rpx;
-			font-size: 40rpx;
-
+			font-size: 32rpx;
 			image {
-				width: 45rpx;
-				height: 45rpx;
+				width: 32rpx;
+				height: 32rpx;
 				margin-right: 15rpx;
-				margin-top: 10rpx;
+				margin-top: 6rpx;
 			}
 
 			.num {

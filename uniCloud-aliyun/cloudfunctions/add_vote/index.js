@@ -3,14 +3,15 @@ const db = uniCloud.database();
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	const hotlist = db.collection('hot_list')
-	event.creatTime=Date.now()
+	event.creatTime=Date.now();
+	let res,hotdata;
 	if(event.switchVal==true){
-		hotlist.add({
+		hotdata= await hotlist.add({
 			...event,
 		})
+		console.log(hotdata)
+		event.hot_id=hotdata.id;
 	}
-	console.log('event : ', event)
-	let res;
 	if (event.voteType == "ImageTextVote") {
 		const collection = db.collection('imageTextVote_list');
 		res = await collection.add({

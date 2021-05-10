@@ -11,7 +11,8 @@
     "pages/videoTextVote/videoTextVote",
     "pages/wxgzh/wxgzh",
     "pages/poster/poster",
-    "pages/rankinglist/rankinglist"
+    "pages/rankinglist/rankinglist",
+    "pages/FAQ/FAQ"
   ],
   "subPackages": [],
   "window": {
@@ -46,5 +47,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

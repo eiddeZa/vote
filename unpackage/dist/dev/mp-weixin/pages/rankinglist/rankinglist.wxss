@@ -48,21 +48,21 @@ page {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  padding: 0 20rpx;
+  padding: 0 30rpx;
 }
 .hdOption .hdOptionBtn {
   border: 1px solid #dcdcdc;
-  padding: 36rpx;
+  padding: 28rpx;
   width: 100%;
   -webkit-border-radius: 10rpx;
           border-radius: 10rpx;
-  font-size: 40rpx;
+  font-size: 32rpx;
 }
 .hdOption .hdOptionBtn image {
-  width: 45rpx;
-  height: 45rpx;
+  width: 32rpx;
+  height: 32rpx;
   margin-right: 15rpx;
-  margin-top: 10rpx;
+  margin-top: 6rpx;
 }
 .hdOption .hdOptionBtn .num {
   display: inline-block;

@@ -144,36 +144,45 @@
 			//删除
 			deleteInfo(item, index) {
 				let that = this;
-				uni.showLoading({
-					title: '删除中...'
-				});
-				uniCloud.callFunction({
-					name: "del_vote",
-					data: {
-						name: item.voteType,
-						_id: item._id,
-						switchVal: item.switchVal
-					},
-					success(res) {
-						console.log(res);
-						uni.hideLoading();
-						if (res.result == "") {
-							uni.showToast({
-								title: "删除成功",
-								duration: 2000
+				uni.showModal({
+					title: '温馨提示',
+					content: `你确定删除此投票吗？`,
+					showCancel: true,
+					success: function(res) {
+						if (res.confirm) {
+							uni.showLoading({
+								title: '删除中...'
 							});
-							that.activityList.splice(index, 1);;
-						} else {
-							that.$operate.toast({
-								title: res.result.msg
-							})
+							uniCloud.callFunction({
+								name: "del_vote",
+								data: {
+									name: item.voteType,
+									_id: item._id,
+									hot_id: item.hot_id,
+									switchVal: item.switchVal
+								},
+								success(res) {
+									uni.hideLoading();
+									if (res.result == "") {
+										uni.showToast({
+											title: "删除成功",
+											duration: 2000
+										});
+										that.activityList.splice(index, 1);;
+									} else {
+										that.$operate.toast({
+											title: res.result.msg
+										})
+									}
+								},
+								fail(error) {
+									uni.hideLoading();
+									that.$operate.toast({
+										title: "网络请求错误！"
+									})
+								}
+							});
 						}
-					},
-					fail(error) {
-						uni.hideLoading();
-						that.$operate.toast({
-							title: "网络请求错误！"
-						})
 					}
 				});
 			},

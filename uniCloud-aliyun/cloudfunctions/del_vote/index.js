@@ -5,26 +5,18 @@ exports.main = async (event, context) => {
 	//event为客户端上传的参数
 	console.log('event : ', event)
 	let res ;
+	if(event.switchVal==true){
+		const hotlist = db.collection('hot_list');
+		await hotlist.doc(event.hot_id).remove();
+	}
 	if (event.name == "ImageTextVote" && event._id) {
 		const collection = db.collection('imageTextVote_list');
-		if(event.switchVal==true){
-			const hotlist = db.collection('hot_list');
-			await hotlist.doc(event._id).remove();
-		}
 		res = await collection.doc(event._id).remove();
 	} else if (event.name == "textVote" && event._id) {
 		const collection = db.collection('textVote_list');
-		if(event.switchVal==true){
-			const hotlist = db.collection('hot_list');
-			await hotlist.doc(event._id).remove();
-		}
 		res = await collection.doc(event._id).remove();
 	}else if (event.name == "videoTextVote" && event._id) {
 		const collection = db.collection('videoTextVote_list');
-		if(event.switchVal==true){
-			const hotlist = db.collection('hot_list');
-			await hotlist.doc(event._id).remove();
-		}
 		res = await collection.doc(event._id).remove();
 	} else {
 		return {

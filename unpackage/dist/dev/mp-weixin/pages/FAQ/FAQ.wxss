@@ -1,0 +1,10 @@
+
+page{
+	background: #FFFFFF;
+	padding:30rpx;
+}
+.collapse-item {
+	color: red;
+	padding-bottom: 10px;
+}
+

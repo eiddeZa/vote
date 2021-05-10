@@ -13,6 +13,20 @@ Vue.use(uView);
 
 const app = new Vue({
 	store,
-    ...App
+	...App
 })
 app.$mount()
+
+setInterval(() => {
+	// 定时任务
+	uniCloud.callFunction({
+		name: "changeStatus",
+		data: {},
+		success(res) {
+			console.log(res);
+		},
+		fail(error) {
+			console.log(error);
+		},
+	});
+}, 1000 * 50)

@@ -22,8 +22,8 @@
 		<view class="titInfo1">
 			<view class="tit">{{ data.activityTitle }}</view>
 			<view class="sharer_">
-				<u-button  size="mini" @click="shareBtn">
-					<u-icon name="zhuanfa"></u-icon>分享
+				<u-button  size="mini" @click="rankingBtn">
+					票数排名<u-icon name="arrow-right"></u-icon>
 				</u-button>
 			</view>
 		</view>
@@ -148,31 +148,12 @@
 				urlWithArgs = urlWithArgs.substring(0, urlWithArgs.length - 1)
 				return urlWithArgs;
 			},
-			// 分享
-			shareBtn(){
-				let obj={
-					pagePath:this.getUrl()
-				};
-				// uni.navigateTo({
-				// 	url: "../poster/poster?obj=" +
-				// 		encodeURIComponent(JSON.stringify(obj)),
-				// });
-				let that=this;
-				uniCloud.callFunction({
-					name: 'qrCode',
-					data: {
-						path: this.getUrl(),
-					},
-					success(res) {
-						console.log(res);
-					},
-					fail(error) {
-						console.log(error)
-						uni.hideLoading();
-						that.$operate.toast({
-							title: '网络请求错误！'
-						});
-					}
+			// 进入排名
+			rankingBtn(){
+				let detail = this.banner;
+				uni.navigateTo({
+					url: "../rankinglist/rankinglist?detailDate=" +
+						encodeURIComponent(JSON.stringify(detail)),
 				});
 			},
 			getDetail() {
@@ -213,6 +194,7 @@
 					data: {
 						name: that.banner.type,
 						_id: that.banner._id,
+						hot_id:that.data.hot_id,
 						voteType: that.data.voteType,
 						switchVal: that.data.switchVal
 					},
@@ -253,15 +235,22 @@
 						name: 'update_vote',
 						data: {
 							name: that.banner.type,
+							voteType:that.data.voteType,
+							hot_id:that.data.hot_id,
 							_id: that.banner._id,
 							voteData: that.activeobj,
 							userInfo: uni.getStorageSync('userInfo'),
-							switchVal: that.data.switchVal
+							switchVal: that.data.switchVal,
+							vcs:{
+								voteMoreTxt: that.data.voteMoreTxt,
+								voteMore: that.data.voteMore,
+							}
 						},
 						success(res) {
 							uni.hideLoading();
 							console.log(res);
 							if (res.result.updated) {
+								that.data.voteItemlist[that.activeItem].vote++;
 								that.activeItem = '*';
 								that.activeobj = {};
 								uni.showToast({
@@ -287,53 +276,6 @@
 						title: '请选择投票项！'
 					});
 				}
-			},
-			aaa() {
-				uni.getImageInfo({
-					src: canvasimg,
-					success(ret) {
-						uni.getSetting({
-							success: res => {
-								if (!res.authSetting['scope.writePhotosAlbum']) {
-									uni.authorize({
-										scope: 'scope.writePhotosAlbum',
-										success() {
-											//这里是用户同意授权后的回调
-											uni.saveImageToPhotosAlbum({
-												filePath: ret.path,
-												success() {
-													uni.showToast({
-														title: '保存成功',
-														icon: 'success',
-														duration: 2000
-													})
-												}
-											})
-										},
-										fail() {
-											//这里是用户拒绝授权后的回调
-											console.log('失败')
-											setShowModal(true)
-										}
-									})
-								} else {
-									//用户已经授权过了
-									console.log('已经授权过')
-									uni.saveImageToPhotosAlbum({
-										filePath: ret.path,
-										success() {
-											uni.showToast({
-												title: '保存成功',
-												icon: 'success',
-												duration: 2000
-											})
-										}
-									})
-								}
-							}
-						})
-					}
-				})
 			}
 		}
 	};

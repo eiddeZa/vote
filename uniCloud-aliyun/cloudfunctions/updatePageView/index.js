@@ -7,21 +7,20 @@ exports.main = async (event, context) => {
 	let res ;
 	if (event.name == "hotList" && event._id) {
 		const collection = db.collection('hot_list');
-
-
+		event.hot_id=event._id;
 		if(event.switchVal==true&&event.voteType=="ImageTextVote"){
 			const imagelist = db.collection('imageTextVote_list');
-			await imagelist.doc(event._id).update({
+			await imagelist.where({hot_id:event.hot_id}).update({
 				pageview: dbCmd.inc(1)
 			})
 		}else if(event.switchVal==true&&event.voteType=="videoTextVote"){
 			const videoTextVote = db.collection('videoTextVote_list');
-			await videoTextVote.doc(event._id).update({
+			await videoTextVote.where({hot_id:event.hot_id}).update({
 				pageview: dbCmd.inc(1)
 			})
 		}else if(event.switchVal==true&&event.voteType=="textVote"){
 			const textVote = db.collection('textVote_list');
-			await textVote.doc(event._id).update({
+			await textVote.where({hot_id:event.hot_id}).update({
 				pageview: dbCmd.inc(1)
 			})
 		}
@@ -32,7 +31,7 @@ exports.main = async (event, context) => {
 		const collection = db.collection('imageTextVote_list');
 		if(event.switchVal==true){
 			const hotlist = db.collection('hot_list');
-			await hotlist.doc(event._id).update({
+			await hotlist.doc(event.hot_id).update({
 				pageview: dbCmd.inc(1)
 			})
 		}
@@ -43,7 +42,7 @@ exports.main = async (event, context) => {
 		const collection = db.collection('textVote_list');
 		if(event.switchVal==true){
 			const hotlist = db.collection('hot_list');
-			await hotlist.doc(event._id).update({
+			await hotlist.doc(event.hot_id).update({
 				pageview: dbCmd.inc(1)
 			})
 		}
@@ -54,7 +53,7 @@ exports.main = async (event, context) => {
 		const collection = db.collection('videoTextVote_list');
 		if(event.switchVal==true){
 			const hotlist = db.collection('hot_list');
-			await hotlist.doc(event._id).update({
+			await hotlist.doc(event.hot_id).update({
 				pageview: dbCmd.inc(1)
 			})
 		}

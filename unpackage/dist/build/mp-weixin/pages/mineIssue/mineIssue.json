@@ -4,6 +4,7 @@
   "usingComponents": {
     "u-subsection": "/node-modules/uview-ui/components/u-subsection/u-subsection",
     "u-icon": "/node-modules/uview-ui/components/u-icon/u-icon",
+    "u-button": "/node-modules/uview-ui/components/u-button/u-button",
     "u-loadmore": "/node-modules/uview-ui/components/u-loadmore/u-loadmore"
   }
 }

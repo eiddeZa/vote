@@ -9,7 +9,10 @@
     "pages/ImageTextVote/ImageTextVote",
     "pages/mineIssue/mineIssue",
     "pages/videoTextVote/videoTextVote",
-    "pages/wxgzh/wxgzh"
+    "pages/wxgzh/wxgzh",
+    "pages/poster/poster",
+    "pages/rankinglist/rankinglist",
+    "pages/FAQ/FAQ"
   ],
   "subPackages": [],
   "window": {

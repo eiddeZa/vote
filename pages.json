@@ -106,6 +106,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/FAQ/FAQ",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "常见问题",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

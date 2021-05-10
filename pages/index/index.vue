@@ -3,7 +3,7 @@
 		<!--  bg-color="#f75360" -->
 		<u-swiper mode="rect" :list="slideShowlist" duration="3000" :effect3d="true"></u-swiper>
 		<view class="hot_tit">
-			<image src="/static/image/hot.png" mode=""></image>
+			<image src="../../static/image/hot.png" mode=""></image>
 			<text>热门活动</text>
 		</view>
 		<view v-for="(item, index) in activityList" :key="index" class="activityList" @click="goDetail(item)">
@@ -40,13 +40,13 @@
 		data() {
 			return {
 				slideShowlist: [{
-						image: "https://cdn.uviewui.com/uview/swiper/1.jpg",
+						image: require("../../static/image/imgList1.jpg"),
 					},
 					{
-						image: "https://cdn.uviewui.com/uview/swiper/2.jpg",
+						image: require("../../static/image/imgList2.jpg"),
 					},
 					{
-						image: "https://cdn.uviewui.com/uview/swiper/3.jpg",
+						image: require("../../static/image/imgList3.jpg"),
 					},
 				],
 				tabs: "",
@@ -145,20 +145,25 @@
 				});
 			},
 			goDetail(item) {
+				if (uni.getStorageSync('userInfo') == '' || uni.getStorageSync('userInfo') == null) {
+					uni.showToast({
+						title: '请先登录！',
+						duration: 2000,
+						icon: 'none'
+					});
+					return false;
+				}
 				let detail = {
 					title: item.activityTitle,
 					_id: item._id,
 					type:"hotList"
 				};
 				console.log(detail);
-				// uni.navigateTo({
-				// 	url: "../detail/detail?detailDate=" +
-				// 		encodeURIComponent(JSON.stringify(detail)),
-				// });
 				uni.navigateTo({
-					url: "../rankinglist/rankinglist?detailDate=" +
+					url: "../detail/detail?detailDate=" +
 						encodeURIComponent(JSON.stringify(detail)),
 				});
+				
 			}
 		},
 	};
@@ -175,7 +180,6 @@
 		line-height: 40rpx;
 		text-align: center;
 		margin: 50rpx 0;
-
 		image {
 			width: 40rpx;
 			height: 40rpx;

@@ -1,16 +1,16 @@
 <template>
 	<view>
-		<mosowe-canvas-image ref="mosoweCanvasComponents" @canvasImage="_canvasImage" :lists="lists" height="300"
-			width="300" showPreview />
-		<image :src="canvasUrl" mode="widthFix"></image>
+		<!-- <mosowe-canvas-image ref="mosoweCanvasComponents" @canvasImage="_canvasImage" :lists="lists" height="300"
+			width="300" showPreview /> -->
+		<!-- <image :src="canvasUrl" mode="widthFix"></image> -->
 	</view>
 </template>
 
 <script>
-import mosoweCanvasImage from "@/components/mosowe-canvas-image/mosowe-canvas-image.vue"
+// import mosoweCanvasImage from "@/components/mosowe-canvas-image/mosowe-canvas-image.vue"
 	export default {
 		components: {
-			mosoweCanvasImage
+			// mosoweCanvasImage
 		},
 		data() {
 			return {
@@ -48,23 +48,6 @@ import mosoweCanvasImage from "@/components/mosowe-canvas-image/mosowe-canvas-im
 				]
 			}
 		},
-		//分享给朋友
-		onShareAppMessage(res) {
-			return {
-				title: this.banner.title,
-				path: this.getUrl(),
-				success: res => {
-					console.info(res)
-				}
-			}
-		},
-		//分享到朋友圈
-		onShareTimeline(res) {
-			return {
-				title: "迅投，快来投票吧！",
-				query: this.getUrl(),
-			}
-		},
 		onLoad(event) {
 			// TODO 后面把参数名替换成 payload
 			const payload = event.obj || event.payload;
@@ -75,9 +58,9 @@ import mosoweCanvasImage from "@/components/mosowe-canvas-image/mosowe-canvas-im
 				this.banner = JSON.parse(payload);
 			}
 			this.lists[1].content=this.banner;
-			this.$nextTick(()=>{
-					this.$refs.mosoweCanvasComponents.createCanvas();
-			})
+			// this.$nextTick(()=>{
+			// 		this.$refs.mosoweCanvasComponents.createCanvas();
+			// })
 			console.log(payload)
 		},
 		methods: {
