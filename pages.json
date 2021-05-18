@@ -115,6 +115,31 @@
             }
             
         }
+        ,{
+            "path" : "pages/functional/functional",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "功能讲解",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/course/course",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "查看教程",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/relevancegzh/relevancegzh",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "关联公众号",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

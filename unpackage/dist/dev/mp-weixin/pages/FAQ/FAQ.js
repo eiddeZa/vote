@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uCollapse: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-collapse/u-collapse */ "node-modules/uview-ui/components/u-collapse/u-collapse").then(__webpack_require__.bind(null, /*! uview-ui/components/u-collapse/u-collapse.vue */ 310))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-collapse/u-collapse */ "node-modules/uview-ui/components/u-collapse/u-collapse").then(__webpack_require__.bind(null, /*! uview-ui/components/u-collapse/u-collapse.vue */ 318))
     },
     uCollapseItem: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-collapse-item/u-collapse-item */ "node-modules/uview-ui/components/u-collapse-item/u-collapse-item").then(__webpack_require__.bind(null, /*! uview-ui/components/u-collapse-item/u-collapse-item.vue */ 317))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-collapse-item/u-collapse-item */ "node-modules/uview-ui/components/u-collapse-item/u-collapse-item").then(__webpack_require__.bind(null, /*! uview-ui/components/u-collapse-item/u-collapse-item.vue */ 325))
     }
   }
 } catch (e) {

@@ -30,8 +30,8 @@
 
 		<view class="cellListBox">
 			<u-cell-group class="cellList">
-				<u-cell-item icon="setting-fill" title="关注公众号"></u-cell-item>
-				<u-cell-item icon="integral-fill" title="常见问题"></u-cell-item>
+				<u-cell-item icon="setting-fill" title="关注公众号" @click="zhgzh"></u-cell-item>
+				<u-cell-item icon="integral-fill" title="常见问题" @click="gofaq"></u-cell-item>
 				<u-cell-item icon="server-fill"><button class="service" open-type='contact'
 						hover-class="u-cell-hover">联系客服</button></u-cell-item>
 			</u-cell-group>
@@ -105,6 +105,18 @@
 						icon: 'none'
 					});
 				}
+			},
+			//常见问题
+			gofaq(){
+				uni.navigateTo({
+					url: '../FAQ/FAQ'
+				});
+			},
+			//关注公众号
+			zhgzh(){
+				uni.navigateTo({
+					url: '../relevancegzh/relevancegzh'
+				});
 			},
 			//免责声明
 			Disclaimer() {

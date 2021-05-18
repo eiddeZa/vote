@@ -96,13 +96,13 @@ var components
 try {
   components = {
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-swiper/u-swiper */ "node-modules/uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! uview-ui/components/u-swiper/u-swiper.vue */ 151))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-swiper/u-swiper */ "node-modules/uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! uview-ui/components/u-swiper/u-swiper.vue */ 159))
     },
     uCountTo: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-count-to/u-count-to */ "node-modules/uview-ui/components/u-count-to/u-count-to").then(__webpack_require__.bind(null, /*! uview-ui/components/u-count-to/u-count-to.vue */ 289))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-count-to/u-count-to */ "node-modules/uview-ui/components/u-count-to/u-count-to").then(__webpack_require__.bind(null, /*! uview-ui/components/u-count-to/u-count-to.vue */ 297))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 172))
+      return __webpack_require__.e(/*! import() | node-modules/uview-ui/components/u-loadmore/u-loadmore */ "node-modules/uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! uview-ui/components/u-loadmore/u-loadmore.vue */ 180))
     }
   }
 } catch (e) {

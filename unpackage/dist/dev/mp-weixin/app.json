@@ -12,7 +12,8 @@
     "pages/wxgzh/wxgzh",
     "pages/poster/poster",
     "pages/rankinglist/rankinglist",
-    "pages/FAQ/FAQ"
+    "pages/FAQ/FAQ",
+    "pages/demo/demo"
   ],
   "subPackages": [],
   "window": {

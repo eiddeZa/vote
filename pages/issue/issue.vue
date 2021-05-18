@@ -47,11 +47,11 @@
 				<image src="../../static/image/changjianwenti.png" mode="" ></image>
 				<view>常见问题</view>
 			</view>
-			<view class="demo-layout bgc2">
+			<view class="demo-layout bgc2" @click="gnjj">
 				<image src="../../static/image/gongneng.png" mode=""></image>
 				<view>功能讲解</view>
 			</view>
-			<view class="demo-layout bgc3" style="margin:0;">
+			<view class="demo-layout bgc3" style="margin:0;" @click="lkjc">
 				<image src="../../static/image/jiaocheng.png" mode=""></image>
 				<view>查看教程</view>
 			</view>
@@ -105,6 +105,16 @@
 			gofaq(){
 				uni.navigateTo({
 					url: '../FAQ/FAQ'
+				});
+			},
+			gnjj(){
+				uni.navigateTo({
+					url: '../functional/functional'
+				});
+			},
+			lkjc(){
+				uni.navigateTo({
+					url: '../course/course'
 				});
 			}
 		}
